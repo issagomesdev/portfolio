@@ -1,5 +1,5 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import { useAppThemeContext } from "../context";
+import { useAppThemeContext } from "../../context";
 
 const CoverPage = () => {
 const theme = useTheme();
@@ -15,7 +15,9 @@ const { themeName, toggleTheme } = useAppThemeContext();
                     <Typography lineHeight={theme.spacing(12)} fontSize={theme.spacing(16)} fontFamily={`'Staatliches', sans-serif`} color={theme.palette.primary.main}>Full</Typography>
                     <Typography lineHeight={theme.spacing(12)} fontSize={theme.spacing(16)} fontFamily={`'Staatliches', sans-serif`} color={theme.palette.secondary.main}>Stack</Typography>
                 </Box>
+
                 <Typography variant="devTitle">Developer</Typography>
+
                 <Box position={'relative'} onClick={toggleTheme} sx={{cursor: 'pointer'}}>
                     <Box width={theme.spacing(10)}>
                         <img src={`/images/${themeName}SwitchBody.png`} style={{ width: '100%', height: 'auto' }}/>

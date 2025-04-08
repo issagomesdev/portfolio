@@ -1,5 +1,5 @@
 import { Box, Button, Container, Stack, Typography, useTheme } from "@mui/material";
-import Logo from "./Logo";
+import Logo from "../Logo";
 
 const Header = () => {
     const theme = useTheme();

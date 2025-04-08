@@ -2,22 +2,22 @@ import { createTheme } from "@mui/material";
 
 export const LightTheme = createTheme({
     palette: {
+        mode: 'light',
         primary: {
             main: '#BFA386',
-            dark:  '#BFA386',
-            light: '#BFA386',
             contrastText: '#3C3C3C'
         },
         secondary: {
             main: '#7E7F6C',
-            dark:  '#7E7F6C',
-            light: '#7E7F6C',
             contrastText: '#3C3C3C' 
         },
         background: {
             paper: '#DADADA',
             default: '#E0E0E0'
-        }
+        },
+        text: {
+            primary: '#3C3C3C'
+        },
     },
     typography: {
         fontFamily: `'Secular One', sans-serif`,
@@ -46,11 +46,25 @@ export const LightTheme = createTheme({
             textTransform: 'uppercase'
         },
         devTitle: {
-            color: '#3C3C3C',
             fontFamily: `'Secular One', sans-serif`,
             fontSize: '20px',
             textTransform: 'uppercase',
-            letterSpacing: '10px'
+            letterSpacing: '10px',
+        },
+        sectionTitle: {
+            fontFamily: `'Secular One', sans-serif`,
+            fontSize: '35px',
+            textTransform: 'uppercase',
+        },
+        bodyText: {
+            fontFamily: `'Secular One', sans-serif`,
+            fontSize: '20px',
+            textAlign: 'justify'
+        },
+        projectType: {
+            fontFamily: `'Secular One', sans-serif`,
+            fontSize: '25px',
+            textTransform: 'uppercase',
         },
     }
 });

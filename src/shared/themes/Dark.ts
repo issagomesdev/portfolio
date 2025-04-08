@@ -2,22 +2,22 @@ import { createTheme } from "@mui/material";
 
 export const DarkTheme = createTheme({
     palette: {
+        mode: 'dark',
         primary: {
             main: '#BFA386',
-            dark:  '#BFA386',
-            light: '#BFA386',
             contrastText: '#E0E0E0'
         },
         secondary: {
             main: '#7E7F6C',
-            dark:  '#7E7F6C',
-            light: '#7E7F6C',
             contrastText: '#E0E0E0' 
         },
         background: {
             paper: '#0A0A0A',
             default: '#1A1A1A'
-        }
+        },
+        text: {
+            primary: '#E0E0E0'
+        },
     },
     typography: {
         fontFamily: `'Secular One', sans-serif`,
@@ -46,11 +46,25 @@ export const DarkTheme = createTheme({
             textTransform: 'uppercase'
         },
         devTitle: {
-            color: '#E0E0E0',
             fontFamily: `'Secular One', sans-serif`,
             fontSize: '20px',
             textTransform: 'uppercase',
             letterSpacing: '10px'
+        },
+        sectionTitle: {
+            fontFamily: `'Secular One', sans-serif`,
+            fontSize: '35px',
+            textTransform: 'uppercase',
+        },
+        bodyText: {
+            fontFamily: `'Secular One', sans-serif`,
+            fontSize: '20px',
+            textAlign: 'justify'
+        },
+        projectType: {
+            fontFamily: `'Secular One', sans-serif`,
+            fontSize: '25px',
+            textTransform: 'uppercase',
         },
     }
 });

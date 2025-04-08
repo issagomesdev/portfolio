@@ -7,6 +7,9 @@ declare module '@mui/material/styles' {
     menuItem: React.CSSProperties;
     menuItemActive: React.CSSProperties;
     devTitle: React.CSSProperties;
+    sectionTitle: React.CSSProperties;
+    bodyText: React.CSSProperties;
+    projectType: React.CSSProperties;
   }
 
   interface TypographyVariantsOptions {
@@ -15,6 +18,9 @@ declare module '@mui/material/styles' {
     menuItem?: React.CSSProperties;
     menuItemActive?: React.CSSProperties;
     devTitle?: React.CSSProperties;
+    sectionTitle?: React.CSSProperties;
+    bodyText?: React.CSSProperties;
+    projectType?: React.CSSProperties;
   }
 }
 
@@ -25,5 +31,8 @@ declare module '@mui/material/Typography' {
     menuItem: true;
     menuItemActive: true;
     devTitle: true;
+    sectionTitle: true;
+    bodyText: true;
+    projectType: true;
   }
 }
