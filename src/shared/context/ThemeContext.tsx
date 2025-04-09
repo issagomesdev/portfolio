@@ -30,7 +30,9 @@ export const AppThemeProvider: React.FC<IAppThemeProviderProps> = ({ children })
       <ThemeContext.Provider value={{ themeName, toggleTheme }}>
         <ThemeProvider theme={theme}>
           <CssBaseline/>
+          <Box>
           {children}
+          </Box>
         </ThemeProvider>
       </ThemeContext.Provider>
     );

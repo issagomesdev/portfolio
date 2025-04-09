@@ -1,14 +1,14 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { useAppThemeContext } from "../../context";
 
-const CoverPage = () => {
-const theme = useTheme();
-const { themeName, toggleTheme } = useAppThemeContext();
+const CoverComponent = () => {
+    const theme = useTheme();
+    const { themeName, toggleTheme } = useAppThemeContext();
 
     return (
         <Box width={'90%'} display={'flex'} justifyContent={'center'}>
-            <Box width={theme.spacing(55)} left={'30%'}>
-                <img src={`/images/${themeName}Cover.png`} style={{ width: '100%', height: 'auto' }} alt="issa gomes dev"/>
+            <Box width={theme.spacing(65)} left={'30%'}>
+                <img src={`/images/${themeName}Cover.png`} style={{ width: '100%', height: 'auto' }} alt="issa gomes dev" />
             </Box>
             <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(2)} zIndex={9}>
                 <Box display={'flex'}>
@@ -18,12 +18,12 @@ const { themeName, toggleTheme } = useAppThemeContext();
 
                 <Typography variant="devTitle">Developer</Typography>
 
-                <Box position={'relative'} onClick={toggleTheme} sx={{cursor: 'pointer'}}>
+                <Box position={'relative'} onClick={toggleTheme} sx={{ cursor: 'pointer' }}>
                     <Box width={theme.spacing(10)}>
-                        <img src={`/images/${themeName}SwitchBody.png`} style={{ width: '100%', height: 'auto' }}/>
+                        <img src={`/images/${themeName}SwitchBody.png`} style={{ width: '100%', height: 'auto' }} />
                     </Box>
-                    <Box width={theme.spacing(4)} position={'absolute'} top={2}  {...(themeName === 'light' ? { right: 2 } : { left: 2 })}> 
-                        <img src={`/images/${themeName}Switch.png`} style={{ width: '100%', height: 'auto' }}/>
+                    <Box width={theme.spacing(4)} position={'absolute'} top={2} {...(themeName === 'light' ? { right: 2 } : { left: 2 })}>
+                        <img src={`/images/${themeName}Switch.png`} style={{ width: '100%', height: 'auto' }} />
                     </Box>
                 </Box>
             </Box>
@@ -31,4 +31,4 @@ const { themeName, toggleTheme } = useAppThemeContext();
     )
 }
 
-export default CoverPage;
+export default CoverComponent;

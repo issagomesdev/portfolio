@@ -4,7 +4,7 @@ import { Theme } from '@mui/material/styles';
 import zIndex from '@mui/material/styles/zIndex';
 
 
-export const profilePhotoBorder = (theme: Theme) => ({
+export const profilePhoto = (theme: Theme) => ({
   width: theme.spacing(55),
   position: 'relative',
   '&::before': {
@@ -21,7 +21,7 @@ export const profilePhotoBorder = (theme: Theme) => ({
   },
 });
 
-export const projectItemBorder = (theme: Theme) => ({
+export const projectItem = (theme: Theme) => ({
   width: theme.spacing(120),
   position: 'relative',
   borderRadius: '4px',

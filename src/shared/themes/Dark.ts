@@ -12,7 +12,7 @@ export const DarkTheme = createTheme({
             contrastText: '#E0E0E0' 
         },
         background: {
-            paper: '#0A0A0A',
+            paper: '#161616',
             default: '#1A1A1A'
         },
         text: {
@@ -24,25 +24,16 @@ export const DarkTheme = createTheme({
         mainLogo: {
             fontFamily: `'Staatliches', sans-serif`,
             fontSize: '60px',
-            color: '#BFA386',
             lineHeight: '50px'
         },
         secondLogo: {
             fontFamily: `'Caveat', cursive`,
             fontSize: '24px',
-            color: '#7E7F6C',
             lineHeight: '10px'
         },
         menuItem: {
             fontFamily: `'Secular One', sans-serif`,
             fontSize: '20px',
-            color: '#7E7F6C',
-            textTransform: 'uppercase'
-        },
-        menuItemActive: {
-            fontFamily: `'Secular One', sans-serif`,
-            fontSize: '20px',
-            color: '#7E7F6C',
             textTransform: 'uppercase'
         },
         devTitle: {
@@ -52,9 +43,9 @@ export const DarkTheme = createTheme({
             letterSpacing: '10px'
         },
         sectionTitle: {
-            fontFamily: `'Secular One', sans-serif`,
-            fontSize: '35px',
-            textTransform: 'uppercase',
+            fontFamily: `'Staatliches', sans-serif`,
+            fontSize: '40px',
+            textTransform: 'uppercase'
         },
         bodyText: {
             fontFamily: `'Secular One', sans-serif`,
@@ -64,7 +55,19 @@ export const DarkTheme = createTheme({
         projectType: {
             fontFamily: `'Secular One', sans-serif`,
             fontSize: '25px',
-            textTransform: 'uppercase',
+            textTransform: 'uppercase'
         },
+        projectNumber: {
+            fontFamily: `'Albert Sans', sans-serif`,
+            fontSize: '45px',
+            lineHeight: '40px',
+            textTransform: 'uppercase'
+        },
+        projectName: {
+            fontFamily: `'Staatliches', sans-serif`,
+            fontSize: '35px',
+            lineHeight: '50px',
+            textTransform: 'uppercase'
+        }
     }
 });

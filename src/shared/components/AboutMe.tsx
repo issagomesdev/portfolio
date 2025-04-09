@@ -1,7 +1,7 @@
 import { Box, Button, Typography, useTheme } from "@mui/material";
-import { profilePhotoBorder } from "../../styles/styles";
+import { profilePhoto } from "../../styles/styles";
 
-const AboutMe = () => {
+const AboutMeComponent = () => {
 
     const theme = useTheme();
 
@@ -13,12 +13,12 @@ const AboutMe = () => {
                 <Button sx={{ backgroundColor: theme.palette.secondary.main, color: 'white', fontSize: theme.spacing(2.5), paddingLeft: theme.spacing(3), paddingRight: theme.spacing(3) }}>Drop Me a Message</Button>
             </Box>
             <Box>
-                <Box sx={(theme) => profilePhotoBorder(theme)}>
-                    <img src={`/images/perfilPhoto.png`} style={{ width: '100%', height: 'auto' }} />
+                <Box sx={(theme) => profilePhoto(theme)}>
+                    <img src={`/images/profilePhoto.png`} style={{ width: '100%', height: 'auto' }} />
                 </Box>
             </Box>
         </Box>
     )
 }
 
-export default AboutMe;
+export default AboutMeComponent;
