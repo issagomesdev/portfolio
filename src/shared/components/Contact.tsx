@@ -1,6 +1,10 @@
-import { Box, Divider, Typography, useTheme } from "@mui/material";
-import LogoComponent from "./Logo";
+import { Box, Typography, useTheme, Input, Button } from "@mui/material";
+import LogoComponent from "./ui/Logo";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CustomTextarea } from "../../styles/styles";
+import { useForm } from "react-hook-form";
 
 const ContactComponent = () => {
     const theme = useTheme();
@@ -36,7 +40,7 @@ const ContactComponent = () => {
 
     const SMComponent = ({ text, icon }: CardItem) => {
         return (
-            <Box bgcolor={theme.palette.secondary.main} boxShadow={'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'} display={'flex'} alignItems={'center'} borderRadius={'4px'} width={theme.spacing(7)} height={theme.spacing(7)} justifyContent={'center'}>
+            <Box sx={{ background: `linear-gradient(to bottom, #9b9d8745 0%, #777865 75%, #7E7F6C 100%)` }} boxShadow={'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'} display={'flex'} alignItems={'center'} borderRadius={'4px'} width={theme.spacing(7)} height={theme.spacing(7)} justifyContent={'center'}>
                 <Icon icon={icon} width={theme.spacing(5)} color={'white'} />
             </Box>
         )
@@ -63,7 +67,7 @@ const ContactComponent = () => {
     const InfoComponent = ({ text, icon }: CardItem) => {
         return (
             <Box display={'flex'} gap={theme.spacing(2)} color={'white'} alignItems={'center'}>
-                <Box bgcolor={theme.palette.secondary.main} boxShadow={'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'} display={'flex'} alignItems={'center'} borderRadius={'4px'} width={theme.spacing(7)} height={theme.spacing(7)} justifyContent={'center'}>
+                <Box sx={{ background: `linear-gradient(to bottom, #9b9d8745 0%, #777865 75%, #7E7F6C 100%)` }} boxShadow={'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'} display={'flex'} alignItems={'center'} borderRadius={'4px'} width={theme.spacing(7)} height={theme.spacing(7)} justifyContent={'center'}>
                     <Icon icon={icon} width={theme.spacing(5)} color={'white'} />
                 </Box>
                 <Typography fontFamily={'"Akatab", sans-serif'}>{text}</Typography>
@@ -71,6 +75,22 @@ const ContactComponent = () => {
         )
     }
 
+    const createContactSchema = z.object({
+        name: z.string().min(1, { message: 'Name is required' }),
+        email: z.string().email({ message: 'Invalid email address' }),
+        message: z.string().min(1, { message: 'Message is required' }),
+    });
+    
+    type CreateContactSchema = z.infer<typeof createContactSchema>;
+
+    const { register, handleSubmit } = useForm<CreateContactSchema>({
+        resolver: zodResolver(createContactSchema)
+    });
+
+    function handleSubmitContact(data: CreateContactSchema) {
+        console.log(data);
+
+    }
 
     return (
         <Box bgcolor={theme.palette.secondary.main} width={'100%'} borderRadius={'100px 100px 0px 0px'} display={'flex'} justifyContent={'center'} alignItems={'center'} paddingTop={theme.spacing(3)}>
@@ -92,7 +112,21 @@ const ContactComponent = () => {
                             ))}
                         </Box>
                     </Box>
-                    <Box width={'50%'} borderRadius={'4px'} boxShadow={'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'} > 
+                    <Box width={'50%'} borderRadius={'4px'} boxShadow={'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'} sx={{ background: `linear-gradient(to bottom, #9b9d8745 0%, #777865 75%, #7E7F6C 100%)` }} display={'flex'}>
+                        <form onSubmit={handleSubmit(handleSubmitContact)} style={{ width: '100%' }}>
+                            <Box width={'100%'} padding={theme.spacing(3)} display={'flex'} flexDirection={'column'} gap={theme.spacing(3)}>
+                                <Box bgcolor={'#0000000f'} borderRadius={'4px'} padding={theme.spacing(2)} boxShadow={'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}>
+                                    <Input disableUnderline placeholder="Name" sx={{ width: '100%', color: "white", fontWeight: '100' }} {...register('name')}/>
+                                </Box>
+                                <Box bgcolor={'#0000000f'} borderRadius={'4px'} padding={theme.spacing(2)} boxShadow={'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}>
+                                    <Input type="email" disableUnderline placeholder="Email" sx={{ width: '100%', color: "white", fontWeight: '100' }} {...register('email')}/>
+                                </Box>
+                                <Box bgcolor={'#0000000f'} borderRadius={'4px'} padding={theme.spacing(2)} boxShadow={'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}>
+                                    <CustomTextarea minRows={10} placeholder="Message" {...register('message')}/>
+                                </Box>
+                                <Button type="submit" sx={{ boxShadow: 'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', backgroundColor: '#0000000f', color: 'white', fontSize: theme.spacing(2.5), paddingX: theme.spacing(6), width: 'fit-content' }}>Send</Button>
+                            </Box>
+                        </form>
                     </Box>
                 </Box>
                 <Box paddingY={theme.spacing(4)} borderTop={`2px solid white`} width={'100%'} display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
