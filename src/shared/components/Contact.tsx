@@ -3,7 +3,7 @@ import LogoComponent from "./ui/Logo";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CustomTextarea } from "../../styles/styles";
+import { CustomTextarea } from "./ui/CustomTextarea";
 import { useForm } from "react-hook-form";
 
 const ContactComponent = () => {
