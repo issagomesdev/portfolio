@@ -95,7 +95,7 @@ const ContactComponent = () => {
     return (
         <Box bgcolor={theme.palette.secondary.main} width={'100%'} borderRadius={'100px 100px 0px 0px'} display={'flex'} justifyContent={'center'} alignItems={'center'} paddingTop={theme.spacing(3)}>
             <Box width={'95%'} height={'100%'} display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(5)}>
-                <Typography variant="sectionTitle" color={'white'}> Contact </Typography>
+                <Typography variant="sectionTitle" color={'white'}> Contato </Typography>
                 <Box display={'flex'} width={'100%'}>
                     <Box display={'flex'} flexDirection={'column'} gap={theme.spacing(4)}>
                         <Box>
@@ -121,7 +121,7 @@ const ContactComponent = () => {
                                 <Box bgcolor={'#0000000f'} borderRadius={'4px'} padding={theme.spacing(2)} boxShadow={'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}>
                                     <Input type="email" disableUnderline placeholder="Email" sx={{ width: '100%', color: "white", fontWeight: '100' }} {...register('email')}/>
                                 </Box>
-                                <Box bgcolor={'#0000000f'} borderRadius={'4px'} padding={theme.spacing(2)} boxShadow={'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}>
+                                <Box  bgcolor={'#0000000f'} borderRadius={'4px'} padding={theme.spacing(2)} boxShadow={'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'} overflow={'hidden auto'} height={theme.spacing(35)}>
                                     <CustomTextarea minRows={10} placeholder="Message" {...register('message')}/>
                                 </Box>
                                 <Button type="submit" sx={{ boxShadow: 'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', backgroundColor: '#0000000f', color: 'white', fontSize: theme.spacing(2.5), paddingX: theme.spacing(6), width: 'fit-content' }}>Send</Button>

@@ -8,7 +8,7 @@ export const CustomTextarea = styled(TextareaAutosize)(({ theme }) => ({
     border: 'none', 
     outline: 'none', 
     textAlign: 'start', 
-    resize: 'vertical',
+    resize: 'none',
     fontFamily: "'Secular One', sans-serif",
     fontSize: theme.spacing(2),
     '&::placeholder': {

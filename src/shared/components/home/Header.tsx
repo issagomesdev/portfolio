@@ -8,11 +8,11 @@ const HeaderComponent = () => {
             <LogoComponent />
             <Box display={'flex'} flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'} width={'100%'}>
                 <Typography variant="menuItem" color={theme.palette.primary.main}>Home</Typography>
-                <Typography variant="menuItem" color={theme.palette.secondary.main}>About me</Typography>
+                <Typography variant="menuItem" color={theme.palette.secondary.main}>Sobre Mim</Typography>
                 <Typography variant="menuItem" color={theme.palette.secondary.main}>Portfolio</Typography>
-                <Typography variant="menuItem" color={theme.palette.secondary.main}>Services</Typography>
-                <Typography variant="menuItem" color={theme.palette.secondary.main}>Experience</Typography>
-                <Button sx={{ backgroundColor: theme.palette.secondary.main, color: 'white', fontSize: theme.spacing(2.5), paddingLeft: theme.spacing(3), paddingRight: theme.spacing(3) }}>Contact</Button>
+                <Typography variant="menuItem" color={theme.palette.secondary.main}>Serviços</Typography>
+                <Typography variant="menuItem" color={theme.palette.secondary.main}>Experiência</Typography>
+                <Button sx={{ backgroundColor: theme.palette.secondary.main, color: 'white', fontSize: theme.spacing(2.5), paddingLeft: theme.spacing(3), paddingRight: theme.spacing(3) }}>Contato</Button>
             </Box>
         </Box>
     )

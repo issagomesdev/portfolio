@@ -49,7 +49,7 @@ export const LightTheme = createTheme({
         },
         bodyText: {
             fontFamily: `'Secular One', sans-serif`,
-            fontSize: '20px',
+            fontSize: '17px',
             textAlign: 'justify'
         },
         projectType: {

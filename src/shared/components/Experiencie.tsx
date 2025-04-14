@@ -128,7 +128,7 @@ const ExperiencieComponent = () => {
 
     return (
         <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'} gap={theme.spacing(8)}>
-            <Typography variant="sectionTitle"> Experiencie </Typography>
+            <Typography variant="sectionTitle"> Experiência </Typography>
             <Box display={'flex'} flexWrap={'wrap'} width={'80%'} rowGap={theme.spacing(10)} justifyContent={'center'}>
                 {expData.map((item) => (
                     <ExpComponent
