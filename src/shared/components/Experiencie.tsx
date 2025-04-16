@@ -127,9 +127,10 @@ const ExperiencieComponent = () => {
     }
 
     return (
-        <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'} gap={theme.spacing(8)}>
+        <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(4)} width={'80%'}>
             <Typography variant="sectionTitle"> Experiência </Typography>
-            <Box display={'flex'} flexWrap={'wrap'} width={'80%'} rowGap={theme.spacing(10)} justifyContent={'center'}>
+            <Typography textAlign={'justify'}>Tenho experiência sólida com uma ampla variedade de tecnologias modernas, atuando tanto no desenvolvimento frontend quanto backend, além de projetos mobile, jogos e design de interface. Essa diversidade de tecnologias me permite trabalhar em diferentes tipos de projetos, com foco na criação de soluções eficientes, escaláveis e com boa experiência de usuário. Abaixo estão as ferramentas e linguagens com as quais já trabalhei de forma prática:</Typography>
+            <Box display={'flex'} flexWrap={'wrap'} rowGap={theme.spacing(10)} justifyContent={'center'}>
                 {expData.map((item) => (
                     <ExpComponent
                         id={item.id}

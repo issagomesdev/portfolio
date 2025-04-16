@@ -1,9 +1,12 @@
-import { Box, Button, Typography, useTheme } from "@mui/material";
+import { Box, Button, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { ProjectItem } from "./ui/ProjectItem";
 
 const PortfolioComponent = () => {
 
     const theme = useTheme();
+    const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
+    const mediumScreen = useMediaQuery(theme.breakpoints.between("md", "lg")); 
+    const largerScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
     return (
         <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} gap={theme.spacing(15)} width={'100%'}>
@@ -18,7 +21,6 @@ const PortfolioComponent = () => {
                 </Box>
             </Box>
             <Box display={'flex'} gap={theme.spacing(15)} flexDirection={'column'} alignItems={'center'}>
-
                 <Box display={'flex'} width={'70%'} gap={theme.spacing(8)}>
                     <Box width={'100%'}>
                         <Box display={'flex'} flexDirection={'column'}>

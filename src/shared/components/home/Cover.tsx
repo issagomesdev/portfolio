@@ -1,14 +1,24 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { useAppThemeContext } from "../../context";
 
 const CoverComponent = () => {
     const theme = useTheme();
+
+    const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
+    const mediumScreen = useMediaQuery("(max-width:1080px)");
+    const largerScreen = useMediaQuery(theme.breakpoints.up("lg"));
+
     const { themeName, toggleTheme } = useAppThemeContext();
 
     return (
-        <Box width={'90%'} display={'flex'} justifyContent={'center'}>
-            <Box width={theme.spacing(65)} left={'30%'}>
-                <img src={`/images/${themeName}Cover.png`} style={{ width: '100%', height: 'auto' }} alt="issa gomes dev" />
+        <Box width={'90%'} display={'flex'} justifyContent={'center'} {...(mediumScreen ? { flexDirection: 'column-reverse', alignItems: 'center', gap: theme.spacing(8) } : null)}>
+            <Box width={theme.spacing(65)} {...(mediumScreen ? { position: 'relative', right: '3%' } : null)}>
+                <img src={`/images/${themeName}Cover.png`} style={{
+                    width: '100%',
+                    height: 'auto',
+                    maskImage: 'linear-gradient(to bottom, black 60%, transparent 90%)',
+                    WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
+                }} alt="issa gomes dev" />
             </Box>
             <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(2)} zIndex={9}>
                 <Box display={'flex'}>

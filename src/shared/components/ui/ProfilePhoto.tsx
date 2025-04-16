@@ -1,7 +1,6 @@
 import { Theme } from '@mui/material/styles';
 
 export const ProfilePhoto = (theme: Theme) => ({
-    width: theme.spacing(60),
     position: 'relative',
     '&::before': {
       content: '""',

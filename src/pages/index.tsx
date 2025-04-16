@@ -11,7 +11,7 @@ function App() {
   const theme = useTheme();
 
   return (
-    <Box display={'flex'} flexDirection={'column'} gap={theme.spacing(10)} alignItems={'center'} paddingTop={theme.spacing(3)}>
+    <Box display={'flex'} flexDirection={'column'} rowGap={theme.spacing(15)} alignItems={'center'} paddingTop={theme.spacing(3)}>
       <HeaderComponent />
       <CoverComponent />
       <AboutMeComponent />

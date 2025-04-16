@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme, Input, Button } from "@mui/material";
+import { Box, Typography, useTheme, Input, Button, useMediaQuery } from "@mui/material";
 import LogoComponent from "./ui/Logo";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { z } from "zod";
@@ -54,7 +54,7 @@ const ContactComponent = () => {
         },
         {
             id: 2,
-            text: 'byissag@gmail.com',
+            text: 'codedbyissa@gmail.com',
             icon: 'ic:twotone-email'
         },
         {
@@ -99,8 +99,8 @@ const ContactComponent = () => {
                 <Box display={'flex'} width={'100%'}>
                     <Box display={'flex'} flexDirection={'column'} gap={theme.spacing(4)}>
                         <Box>
-                            <Typography color={'white'} fontFamily={'"Akatab", sans-serif'} fontSize={theme.spacing(4)} fontWeight={'500'}>Drop Me a Message</Typography>
-                            <Typography color={'white'} width={'50%'} textAlign={'justify'} fontSize={theme.spacing(1.5)} fontWeight={'400'}>Lorem ipsum odor amet, consectetuer adipiscing elit. Dui dolor vestibulum cras, tristique vivamus enim eu. Dui amet pulvinar praesent cubilia lacus conubia per. Sociosqu proin hendrerit ullamcorper lectus semper integer.</Typography>
+                            <Typography color={'white'} fontFamily={'"Akatab", sans-serif'} fontSize={theme.spacing(4)} fontWeight={'500'}>Me envie uma mensagem</Typography>
+                            <Typography color={'white'} width={'70%'} textAlign={'justify'} fontSize={theme.spacing(1.5)} fontWeight={'400'}>Se você quiser entrar em contato comigo, pode fazer isso por telefone, e-mail ou preenchendo o formulário ao lado. Caso escolha o formulário, lembre-se de deixar seu nome e sobrenome, um e-mail válido para que eu possa retornar o contato e, no corpo da mensagem, explique com o máximo de detalhes possível sobre o seu projeto e do que você precisa. Assim, consigo entender melhor suas necessidades e responder de forma mais precisa.</Typography>
                         </Box>
                         <Box display={'flex'} flexDirection={'column'} gap={theme.spacing(2)}>
                             {InfoData.map((item) => (
@@ -112,19 +112,19 @@ const ContactComponent = () => {
                             ))}
                         </Box>
                     </Box>
-                    <Box width={'50%'} borderRadius={'4px'} boxShadow={'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'} sx={{ background: `linear-gradient(to bottom, #9b9d8745 0%, #777865 75%, #7E7F6C 100%)` }} display={'flex'}>
+                    <Box width={'100%'} borderRadius={'4px'} boxShadow={'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'} sx={{ background: `linear-gradient(to bottom, #9b9d8745 0%, #777865 75%, #7E7F6C 100%)` }} display={'flex'}>
                         <form onSubmit={handleSubmit(handleSubmitContact)} style={{ width: '100%' }}>
                             <Box width={'100%'} padding={theme.spacing(3)} display={'flex'} flexDirection={'column'} gap={theme.spacing(3)}>
                                 <Box bgcolor={'#0000000f'} borderRadius={'4px'} padding={theme.spacing(2)} boxShadow={'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}>
-                                    <Input disableUnderline placeholder="Name" sx={{ width: '100%', color: "white", fontWeight: '100' }} {...register('name')}/>
+                                    <Input disableUnderline placeholder="Nome" sx={{ width: '100%', color: "white", fontWeight: '100' }} {...register('name')}/>
                                 </Box>
                                 <Box bgcolor={'#0000000f'} borderRadius={'4px'} padding={theme.spacing(2)} boxShadow={'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'}>
                                     <Input type="email" disableUnderline placeholder="Email" sx={{ width: '100%', color: "white", fontWeight: '100' }} {...register('email')}/>
                                 </Box>
                                 <Box  bgcolor={'#0000000f'} borderRadius={'4px'} padding={theme.spacing(2)} boxShadow={'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'} overflow={'hidden auto'} height={theme.spacing(35)}>
-                                    <CustomTextarea minRows={10} placeholder="Message" {...register('message')}/>
+                                    <CustomTextarea minRows={10} placeholder="Mensagem" {...register('message')}/>
                                 </Box>
-                                <Button type="submit" sx={{ boxShadow: 'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', backgroundColor: '#0000000f', color: 'white', fontSize: theme.spacing(2.5), paddingX: theme.spacing(6), width: 'fit-content' }}>Send</Button>
+                                <Button type="submit" sx={{ boxShadow: 'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px', backgroundColor: '#0000000f', color: 'white', fontSize: theme.spacing(2.5), paddingX: theme.spacing(6), width: 'fit-content' }}>Enviar</Button>
                             </Box>
                         </form>
                     </Box>
