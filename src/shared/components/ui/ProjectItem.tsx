@@ -1,14 +1,14 @@
 import { Theme } from '@mui/material/styles';
 
-export const ProjectItem = (theme: Theme) => ({
-  width: theme.spacing(120),
+export const ProjectItem = (theme: Theme, right: string) => ({
   position: 'relative',
   borderRadius: '4px',
+  height: 'fit-content',
   '&::before': {
     content: '""',
     position: 'absolute',
-    top: '40px',
-    right: '40px',
+    top: '30px',
+    right: right,
     width: '99%',
     height: '95%',
     zIndex: '-9',
