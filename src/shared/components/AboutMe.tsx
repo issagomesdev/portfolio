@@ -22,7 +22,7 @@ const AboutMeComponent = () => {
                     <Button sx={{ backgroundColor: theme.palette.secondary.main, color: 'white', fontSize: theme.spacing(2.5), paddingX: theme.spacing(3) }}>Entre em contato</Button>
                 </Box>
                 <Box>
-                    <Box sx={(theme) => ProfilePhoto(theme)} {...(smallScreen || mediumScreen ? { width: theme.spacing(50) } : { width: theme.spacing(60) })}>
+                    <Box sx={(theme) => ProfilePhoto(theme)} {...(smallScreen? { width: theme.spacing(35) } : mediumScreen ? { width: theme.spacing(50) } : { width: theme.spacing(60) })}>
                         <img src={`/images/profilePhoto.png`} style={{ width: '100%', height: 'auto' }} />
                     </Box>
                 </Box>

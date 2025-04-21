@@ -8,6 +8,9 @@ import { useForm } from "react-hook-form";
 
 const ContactComponent = () => {
     const theme = useTheme();
+    const smallScreen = useMediaQuery(theme.breakpoints.down("md")); 
+    const mediumScreen = useMediaQuery(theme.breakpoints.between("md", "lg"));
+    const largerScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
     type CardItem = {
         id: number
@@ -96,7 +99,7 @@ const ContactComponent = () => {
         <Box bgcolor={theme.palette.secondary.main} width={'100%'} borderRadius={'100px 100px 0px 0px'} display={'flex'} justifyContent={'center'} alignItems={'center'} paddingTop={theme.spacing(3)}>
             <Box width={'95%'} height={'100%'} display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(5)}>
                 <Typography variant="sectionTitle" color={'white'}> Contato </Typography>
-                <Box display={'flex'} width={'100%'}>
+                <Box display={'flex'} width={'100%'} {...(smallScreen || mediumScreen ? { flexWrap:'wrap', gap:theme.spacing(4)} : null)}>
                     <Box display={'flex'} flexDirection={'column'} gap={theme.spacing(4)}>
                         <Box>
                             <Typography color={'white'} fontFamily={'"Akatab", sans-serif'} fontSize={theme.spacing(4)} fontWeight={'500'}>Me envie uma mensagem</Typography>
@@ -129,7 +132,7 @@ const ContactComponent = () => {
                         </form>
                     </Box>
                 </Box>
-                <Box paddingY={theme.spacing(4)} borderTop={`2px solid white`} width={'100%'} display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
+                <Box paddingY={theme.spacing(4)} borderTop={`2px solid white`} width={'100%'} display={'flex'} alignItems={'center'}  {...(smallScreen ? { flexDirection: 'column-reverse'} : {justifyContent: 'space-between'})} gap={theme.spacing(2)}>
                     <LogoComponent color={'white'} />
                     <Typography color={'white'}>2025 - Issa Gomes, All rights reserved</Typography>
                     <Box display={'flex'} gap={theme.spacing(2)}>
