@@ -45,7 +45,7 @@ const PortfolioComponent = () => {
     const ProjectComponent = (project: Project) => {
         return (
             <Box display={'flex'} width={'60%'} gap={smallScreen || mediumScreen? theme.spacing(7) : theme.spacing(8)} {...(smallScreen || mediumScreen ? {flexDirection: 'column-reverse', alignItems: project.id % 2 === 0? 'flex-end' : 'flex-start'} : {flexDirection: project.id % 2 === 0? 'row' : 'row-reverse', alignItems: 'flex-start'})}>
-                <Box width={'100%'}>
+                <Box width={'100%'} display={'flex'} flexDirection={'column'} gap={theme.spacing(1)}>
                     <Box display={'flex'} flexDirection={'column'} alignItems={(smallScreen || mediumScreen) && project.id % 2 === 0? 'flex-end' : 'flex-start'}>
                         <Typography variant="projectNumber" color={theme.palette.primary.main}>Projeto {project.id}</Typography>
                         <Typography variant="projectName" textAlign={(smallScreen || mediumScreen) && project.id % 2 === 0? 'end' : 'start'}>Storager - Your Store Manager</Typography>
@@ -61,10 +61,10 @@ const PortfolioComponent = () => {
     }
 
     return (
-        <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} gap={theme.spacing(15)} width={'100%'}>
+        <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} gap={theme.spacing(smallScreen ? 8 : mediumScreen ? 10 : 15)} width={'100%'}>
             <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(2)}>
                 <Typography variant="sectionTitle"> Portfolio </Typography>
-                <Box display={'flex'} width={'fit-content'} marginX={theme.spacing(1.5)} {...(smallScreen? {justifyContent: 'center', flexWrap: 'wrap'} : {justifyContent: 'space-between'})} gap={theme.spacing(5)}>
+                <Box display={'flex'} width={'fit-content'} marginX={theme.spacing(1.5)} {...(smallScreen? {justifyContent: 'center', flexWrap: 'wrap'} : {justifyContent: 'space-between'})} rowGap={theme.spacing(2)} columnGap={theme.spacing(4)}>
                     <Typography variant="projectType" color={theme.palette.primary.main}> Web </Typography>
                     <Typography variant="projectType"> Desktop </Typography>
                     <Typography variant="projectType"> Mobile </Typography>

@@ -66,7 +66,7 @@ export const LightTheme = createTheme({
         projectName: {
             fontFamily: `'Staatliches', sans-serif`,
             fontSize: '35px',
-            lineHeight: '50px',
+            lineHeight: '40px',
             textTransform: 'uppercase'
         }
     }

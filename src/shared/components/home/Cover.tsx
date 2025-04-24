@@ -12,7 +12,7 @@ const CoverComponent = () => {
 
     return (
         <Box width={'90%'} display={'flex'} justifyContent={'center'} {...(mediumScreen ? { flexDirection: 'column-reverse', alignItems: 'center', gap: theme.spacing(8) } : null)}>
-            <Box width={smallScreen? theme.spacing(50) : theme.spacing(65)} {...(mediumScreen ? { position: 'relative', right: smallScreen? '0' : '3%' } : null)}>
+            <Box width={ theme.spacing(smallScreen? 50 : theme.spacing(65))} {...(mediumScreen ? { position: 'relative', right: smallScreen? '0' : '3%' } : null)}>
                 <img src={`/images/${themeName}Cover.png`} style={{
                     width: '100%',
                     height: 'auto',
