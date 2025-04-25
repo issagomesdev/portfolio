@@ -6,7 +6,7 @@ const HeaderComponent = () => {
     const miniScreen = useMediaQuery("(max-width:500px)");
     const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
     const mediumScreen = useMediaQuery(theme.breakpoints.between("md", "lg"));
-    const largerScreen = useMediaQuery(theme.breakpoints.up("lg"));
+    // const largerScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
     return (
         <Box display={'flex'} gap={theme.spacing(smallScreen? 3 : 8)} width={miniScreen? '90%' : '100%'}>

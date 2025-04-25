@@ -6,7 +6,7 @@ const PortfolioComponent = () => {
     const theme = useTheme();
     const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
     const mediumScreen = useMediaQuery(theme.breakpoints.between("md", "lg"));
-    const largerScreen = useMediaQuery(theme.breakpoints.up("lg"));
+    // const largerScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
     type Project = {
         id: number

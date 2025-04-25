@@ -6,7 +6,7 @@ const CoverComponent = () => {
 
     const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
     const mediumScreen = useMediaQuery("(max-width:1080px)");
-    const largerScreen = useMediaQuery(theme.breakpoints.up("lg"));
+    // const largerScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
     const { themeName, toggleTheme } = useAppThemeContext();
 

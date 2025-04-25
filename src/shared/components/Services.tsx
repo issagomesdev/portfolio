@@ -6,7 +6,7 @@ const ServicesComponent = () => {
     const theme = useTheme();
     const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
     const mediumScreen = useMediaQuery("(max-width:1200px)");
-    const largerScreen = useMediaQuery(theme.breakpoints.up("lg"));
+    // const largerScreen = useMediaQuery(theme.breakpoints.up("lg"));
     const { themeName } = useAppThemeContext();
 
     type Service = {
