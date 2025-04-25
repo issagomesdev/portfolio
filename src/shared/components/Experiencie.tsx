@@ -1,7 +1,10 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 const ExperiencieComponent = () => {
     const theme = useTheme();
+    const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
+    const mediumScreen = useMediaQuery(theme.breakpoints.between("md", "lg"));
+    const largerScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
     type ExpItem = {
         id: number
@@ -130,7 +133,7 @@ const ExperiencieComponent = () => {
         <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(4)} width={'80%'}>
             <Typography variant="sectionTitle"> Experiência </Typography>
             <Typography textAlign={'justify'}>Tenho experiência sólida com uma ampla variedade de tecnologias modernas, atuando tanto no desenvolvimento frontend quanto backend, além de projetos mobile, jogos e design de interface. Essa diversidade de tecnologias me permite trabalhar em diferentes tipos de projetos, com foco na criação de soluções eficientes, escaláveis e com boa experiência de usuário. Abaixo estão as ferramentas e linguagens com as quais já trabalhei de forma prática:</Typography>
-            <Box display={'flex'} flexWrap={'wrap'} rowGap={theme.spacing(10)} justifyContent={'center'}>
+            <Box display={'flex'} flexWrap={'wrap'} rowGap={theme.spacing(10)} justifyContent={smallScreen? 'space-between' : 'center'}>
                 {expData.map((item) => (
                     <ExpComponent
                         id={item.id}
