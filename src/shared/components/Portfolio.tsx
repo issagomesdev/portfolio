@@ -1,4 +1,4 @@
-import { Box, Button, Typography, useTheme, useMediaQuery } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { ProjectItem } from "./ui/ProjectItem";
 
 const PortfolioComponent = () => {

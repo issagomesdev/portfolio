@@ -41,7 +41,7 @@ const ContactComponent = () => {
         }
     ];
 
-    const SMComponent = ({ text, icon }: CardItem) => {
+    const SMComponent = ({ icon }: CardItem) => {
         return (
             <Box sx={{ background: `linear-gradient(to bottom, #9b9d8745 0%, #777865 75%, #7E7F6C 100%)` }} boxShadow={'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'} display={'flex'} alignItems={'center'} borderRadius={'4px'} width={theme.spacing(7)} height={theme.spacing(7)} justifyContent={'center'}>
                 <Icon icon={icon} width={theme.spacing(5)} color={'white'} />
