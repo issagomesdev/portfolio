@@ -1,4 +1,4 @@
-import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { Icon } from "@iconify/react";
 import { Section } from "../../types/section";
 import { useSectionContext } from "../context/SectionContext";
