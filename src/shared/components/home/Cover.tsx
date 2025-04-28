@@ -12,7 +12,7 @@ const CoverComponent = () => {
 
     return (
         <Box width={'90%'} display={'flex'} justifyContent={'center'} {...(mediumScreen ? { flexDirection: 'column-reverse', alignItems: 'center', gap: theme.spacing(8) } : null)}>
-            <Box width={ theme.spacing(smallScreen? 50 : theme.spacing(65))} {...(mediumScreen ? { position: 'relative', right: smallScreen? '0' : '3%' } : null)}>
+            <Box width={theme.spacing(smallScreen ? 50 : theme.spacing(65))} {...(mediumScreen ? { position: 'relative', right: smallScreen ? '0' : '3%' } : null)}>
                 <img src={`/images/${themeName}Cover.png`} style={{
                     width: '100%',
                     height: 'auto',
@@ -21,14 +21,19 @@ const CoverComponent = () => {
                 }} alt="issa gomes dev" />
             </Box>
             <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(2)} zIndex={9}>
-                <Box display={'flex'} flexWrap={smallScreen? 'wrap' : 'nowrap'} justifyContent={'center'} gap={theme.spacing(2)}>
+                <Box display={'flex'} flexWrap={smallScreen ? 'wrap' : 'nowrap'} justifyContent={'center'} gap={theme.spacing(2)}>
                     <Typography lineHeight={theme.spacing(12)} fontSize={theme.spacing(16)} fontFamily={`'Staatliches', sans-serif`} color={theme.palette.primary.main}>Full</Typography>
                     <Typography lineHeight={theme.spacing(12)} fontSize={theme.spacing(16)} fontFamily={`'Staatliches', sans-serif`} color={theme.palette.secondary.main}>Stack</Typography>
                 </Box>
 
                 <Typography variant="devTitle">Developer</Typography>
 
-                <Box position={'relative'} onClick={toggleTheme} sx={{ cursor: 'pointer' }}>
+                <Box position={'relative'} onClick={toggleTheme} sx={{
+                    cursor: 'pointer',
+                    outline: 'none',
+                    '&:focus': { outline: 'none' },
+                    WebkitTapHighlightColor: 'transparent'
+                }}>
                     <Box width={theme.spacing(10)}>
                         <img src={`/images/${themeName}SwitchBody.png`} style={{ width: '100%', height: 'auto' }} />
                     </Box>

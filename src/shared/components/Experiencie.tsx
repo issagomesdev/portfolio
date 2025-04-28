@@ -122,8 +122,8 @@ const ExperiencieComponent = () => {
 
     const ExpComponent = ({ title, icon }: ExpItem) => {
         return (
-            <Box flex={'0 0 calc(20%)'} display={'flex'} flexDirection={'column'} justifyContent={'flex-end'} alignItems={'center'} gap={theme.spacing(3)}>
-                <Icon icon={icon} width={theme.spacing(15)} />
+            <Box flex={smallScreen? '1 1 33.3%' : '0 0 calc(20%)'} display={'flex'} flexDirection={'column'} justifyContent={'flex-end'} alignItems={'center'} gap={theme.spacing(3)}>
+                <Icon icon={icon} width={'50%'} />
                 <Typography textAlign={'center'}>{title}</Typography>
             </Box>
         )
