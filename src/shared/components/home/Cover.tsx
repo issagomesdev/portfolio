@@ -3,10 +3,8 @@ import { useAppThemeContext } from "../../context";
 
 const CoverComponent = () => {
     const theme = useTheme();
-
-    const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
+    const smallScreen = useMediaQuery(theme.breakpoints.down("sm"));
     const mediumScreen = useMediaQuery("(max-width:1080px)");
-    // const largerScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
     const { themeName, toggleTheme } = useAppThemeContext();
 

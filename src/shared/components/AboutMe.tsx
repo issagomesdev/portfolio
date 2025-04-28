@@ -6,7 +6,6 @@ const AboutMeComponent = () => {
     const theme = useTheme();
     const smallScreen = useMediaQuery(theme.breakpoints.down("md")); 
     const mediumScreen = useMediaQuery(theme.breakpoints.between("md", "lg"));
-    // const largerScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
     return (
         <Box width={'80%'} display={'flex'} flexDirection={'column'} gap={theme.spacing(2)} marginX={'auto'}>

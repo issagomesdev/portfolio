@@ -6,7 +6,7 @@ const ServicesComponent = () => {
     const theme = useTheme();
     const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
     const mediumScreen = useMediaQuery("(max-width:1200px)");
-    // const largerScreen = useMediaQuery(theme.breakpoints.up("lg"));
+    
     const { themeName } = useAppThemeContext();
 
     type Service = {
@@ -55,7 +55,7 @@ const ServicesComponent = () => {
                     <Box padding={theme.spacing(2)} bgcolor={theme.palette.secondary.main} color={theme.palette.background.paper} borderRadius={'100%'} position={'relative'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
                         <Icon icon={service.icon} width={smallScreen ? theme.spacing(5) : theme.spacing(8)} />
                     </Box>
-                    {smallScreen ? <Box> <Typography color={theme.palette.secondary.main} textTransform={'uppercase'} fontFamily={'Staatliches'} fontSize={smallScreen ? theme.spacing(4) : theme.spacing(6)} lineHeight={smallScreen ? theme.spacing(4) : theme.spacing(6)} textAlign={mediumScreen ? 'center' : 'start'} sx={{ wordBreak: 'break-all' }}>{service.title + service.cotitle}</Typography> </Box> : <Box> <Typography color={theme.palette.secondary.main} textTransform={'uppercase'} fontFamily={'Staatliches'} fontSize={smallScreen ? theme.spacing(4) : theme.spacing(6)} lineHeight={smallScreen ? theme.spacing(4) : theme.spacing(6)} textAlign={mediumScreen ? 'center' : 'start'} sx={{ wordBreak: 'break-word' }}>{service.title}</Typography>
+                    {smallScreen ? <Box> <Typography color={theme.palette.secondary.main} textTransform={'uppercase'} fontFamily={'Staatliches'} fontSize={smallScreen ? theme.spacing(4) : theme.spacing(6)} lineHeight={smallScreen ? theme.spacing(4) : theme.spacing(6)} textAlign={mediumScreen ? 'center' : 'start'} sx={{ wordBreak: 'break-all' }}>{`${service.title} ${service.cotitle}`}</Typography> </Box> : <Box> <Typography color={theme.palette.secondary.main} textTransform={'uppercase'} fontFamily={'Staatliches'} fontSize={smallScreen ? theme.spacing(4) : theme.spacing(6)} lineHeight={smallScreen ? theme.spacing(4) : theme.spacing(6)} textAlign={mediumScreen ? 'center' : 'start'} sx={{ wordBreak: 'break-word' }}>{service.title}</Typography>
                         <Typography color={theme.palette.secondary.main} textTransform={'uppercase'} fontFamily={'Staatliches'} fontSize={smallScreen ? theme.spacing(4) : theme.spacing(6)} lineHeight={smallScreen ? theme.spacing(4) : theme.spacing(6)} textAlign={mediumScreen ? 'center' : 'start'} sx={{ wordBreak: 'break-word' }}>{service.cotitle}</Typography> </Box>}
 
                 </Box>
