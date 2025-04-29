@@ -4,13 +4,16 @@ import App from './App.tsx'
 import "./styles/styles.css";
 import { AppThemeProvider } from "./shared/context/ThemeContext";
 import { SectionProvider } from './shared/context/SectionContext.tsx';
+import { ScrollProvider } from './shared/context/ScrollContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <AppThemeProvider>
-      <SectionProvider>
-        <App />
-      </SectionProvider>
+      <ScrollProvider>
+        <SectionProvider>
+          <App />
+        </SectionProvider>
+      </ScrollProvider>
     </AppThemeProvider>
   </StrictMode>,
 )

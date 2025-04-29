@@ -1,5 +1,5 @@
 export type Section = {
-    id: number;
+    id: "homeRef" | "aboutRef" | "portfolioRef" | "servicesRef" | "experienceRef" | "contactRef";
     name: string;
     icon: string;
 }

@@ -9,7 +9,7 @@ const CoverComponent = () => {
     const { themeName, toggleTheme } = useAppThemeContext();
 
     return (
-        <Box width={'90%'} display={'flex'} justifyContent={'center'} {...(mediumScreen ? { flexDirection: 'column-reverse', alignItems: 'center', gap: theme.spacing(8) } : null)}>
+        <Box width={'90%'} display={'flex'} justifyContent={'center'} {...(mediumScreen ? { flexDirection: 'column-reverse', alignItems: 'center', gap: theme.spacing(8) } : null)} marginTop={theme.spacing(15)}>
             <Box width={theme.spacing(smallScreen ? 50 : theme.spacing(65))} {...(mediumScreen ? { position: 'relative', right: smallScreen ? '0' : '3%' } : null)}>
                 <img src={`/images/${themeName}Cover.png`} style={{
                     width: '100%',

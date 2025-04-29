@@ -11,35 +11,13 @@ const FloatingMenu = () => {
 
     const theme = useTheme();
     const { sections, section, toggleSection } = useSectionContext();
-    const { homeRef, aboutRef, portfolioRef, servicesRef, experienceRef } = useScrollContext();
 
-
+    const { scrollToSection } = useScrollContext();
     const [status, setStatus] = useState<boolean>(false);
 
     const MenuItemComponent = (item: Section) => {
-
-        const handleClick = () => {
-            switch (item.name) {
-                case 'Home':
-                    homeRef.current?.scrollIntoView({ behavior: "smooth" });
-                    break;
-                case 'Sobre Mim':
-                    aboutRef.current?.scrollIntoView({ behavior: "smooth" });
-                    break;
-                case 'Portfolio':
-                    portfolioRef.current?.scrollIntoView({ behavior: "smooth" });
-                    break;
-                case 'Serviços':
-                    servicesRef.current?.scrollIntoView({ behavior: "smooth" });
-                    break;
-                case 'Experiência':
-                    experienceRef.current?.scrollIntoView({ behavior: "smooth" });
-                    break;
-            }
-        };
-        
         return (
-            <Box onClick={() => { toggleSection(item); handleClick() }} display={'flex'} flexDirection={'column'} gap={1} padding={1} zIndex={100} bgcolor={section?.id == item.id ? theme.palette.primary.main : theme.palette.secondary.main} borderRadius={10} boxShadow={theme.shadows[3]} sx={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}>
+            <Box onClick={() => { toggleSection(item); scrollToSection(item.id) }} display={'flex'} flexDirection={'column'} gap={1} padding={1} zIndex={100} bgcolor={section?.id == item.id ? theme.palette.primary.main : theme.palette.secondary.main} borderRadius={10} boxShadow={theme.shadows[3]} sx={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}>
                 <Icon icon={item.icon} width={theme.spacing(4)} color={theme.palette.background.default} />
             </Box>
         )
