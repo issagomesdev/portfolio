@@ -24,8 +24,18 @@ export const ScrollProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const experienceRef = useRef<HTMLDivElement | null>(null);
   const contactRef = useRef<HTMLDivElement | null>(null);
 
+  const getOffset = () => {
+    if (window.innerWidth < 600) {
+      return 10;
+    } else if (window.innerWidth < 960) { 
+      return 20;
+    } else { 
+      return 110;
+    }
+  };
+
   const scrollToSection = (section: keyof IScrollContextData['refs']) => {
-    const offset = 50;
+    const offset = getOffset();
     const sectionRef: { [key in keyof IScrollContextData['refs']]: RefObject<HTMLDivElement | null> } = {
       homeRef: homeRef,
       aboutRef: aboutRef,

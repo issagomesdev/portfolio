@@ -1,6 +1,6 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { Section } from "../../types/section";
-import { SectionController } from "../../controllers/sectionController";
+import { SectionController } from "../../controllers/SectionController";
 
 interface ISectionContextData {
     sections: Section[];
@@ -19,21 +19,59 @@ export const SectionProvider: React.FC<ISectionProviderProps> = ({ children }) =
 
     const [sections, setSections] = useState<Section[]>([]);
     const [section, setSection] = useState<Section>();
+    const [scrollControl, setScrollControl] = useState<boolean>(true);
+    const sectionElementsRef = useRef<Record<string, HTMLElement>>({});
 
     const toggleSection = useCallback((section: Section) => {
+        setScrollControl(false);
         setSection(section);
+        setTimeout(() => {
+            setScrollControl(true);
+        }, 1000);
     }, []);
 
     useEffect(() => {
         const fetchSections = async () => {
-          const data = await SectionController.getSections();
-          setSections(data);
-          if (data.length > 0) {
-            setSection(data[0]);
-          }
+            const data = await SectionController.getSections();
+            setSections(data);
+            if (data.length > 0) {
+                setSection(data[0]);
+            }
         };
         fetchSections();
-      }, []);
+    }, []);
+
+    useEffect(() => {
+        if (sections.length === 0 || !scrollControl) return;
+
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY + 100;
+
+            for (const sec of sections) {
+                const element = document.getElementById(sec.id);
+                if (element) {
+                    sectionElementsRef.current[sec.id] = element;
+                }
+            }
+
+            const currentSection = sections.find((sec) => {
+                const element = sectionElementsRef.current[sec.id];
+                if (!element) return false;
+                const { offsetTop, offsetHeight } = element;
+                return scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight;
+            });
+            if (currentSection && currentSection.id !== section?.id) {
+                setSection(currentSection);
+            }
+
+            if (!currentSection) {
+                setSection(undefined);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [sections, section, scrollControl]);
 
     const value = useMemo(() => ({
         sections,

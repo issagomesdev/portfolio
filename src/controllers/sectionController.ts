@@ -1,4 +1,4 @@
-import { SectionService } from "../services/sectionService";
+import { SectionService } from "../services/SectionService";
 import { Section } from "../types/section";
 
 export const SectionController = {

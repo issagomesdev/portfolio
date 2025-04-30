@@ -7,11 +7,10 @@ import { useScrollContext } from "../../context/ScrollContext";
 
 const HeaderComponent = () => {
     const theme = useTheme();
-    const smallScreen = useMediaQuery("(max-width:500px)");
+    const smallScreen = useMediaQuery("(max-width:600px)");
     const mediumScreen = useMediaQuery(theme.breakpoints.down("md"));
     const largerScreen = useMediaQuery(theme.breakpoints.between("md", "lg"));
     const { sections, section, toggleSection } = useSectionContext();
-
     const { scrollToSection } = useScrollContext();
 
     const MenuItemComponent = (item: Section) => {
@@ -24,7 +23,7 @@ const HeaderComponent = () => {
     }
 
     return (
-        <Box display={'flex'} gap={theme.spacing(mediumScreen ? 3 : 8)} width={smallScreen ? '90%' : '85%'}>
+        <Box display={'flex'} gap={theme.spacing(mediumScreen ? 3 : 8)} width={mediumScreen ? '100%' : '90%'}>
             <LogoComponent />
             <Box display={'flex'} flexDirection={'row'} {...(mediumScreen ? { justifyContent: 'flex-end' } : { justifyContent: 'space-between' })} alignItems={'center'} width={'100%'}>
                 {sections?.map((item, index) => (
