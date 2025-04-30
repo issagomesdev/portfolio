@@ -5,7 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CustomTextarea } from "./ui/CustomTextarea";
 import { useForm } from "react-hook-form";
-import { showToast } from "../utils/toast";
+import { showToast } from "../utils/Toast";
 
 const ContactComponent = () => {
     const theme = useTheme();

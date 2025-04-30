@@ -1,6 +1,6 @@
 import { Toaster } from "sonner";
 import AppRoutes from "./routes";
-import { Box, Typography, useTheme, Input, Button, useMediaQuery } from "@mui/material";
+import { useTheme } from "@mui/material";
 
 function App() {
   const theme = useTheme();
