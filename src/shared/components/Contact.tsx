@@ -86,12 +86,13 @@ const ContactComponent = () => {
 
     type CreateContactSchema = z.infer<typeof createContactSchema>;
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<CreateContactSchema>({
+    const { register, handleSubmit, reset, formState: { } } = useForm<CreateContactSchema>({
         resolver: zodResolver(createContactSchema)
     });
 
     async function handleSubmitContact(data: CreateContactSchema) {
-        const promise = new Promise<string>((resolve, reject) => setTimeout(() => reject("Dados carregados"), 2000));
+        console.log(data);
+        const promise = new Promise<string>((resolver) => setTimeout(() => resolver("Dados carregados"), 2000));
 
         await showToast.promise(promise, {
             loading: "Enviando...",
