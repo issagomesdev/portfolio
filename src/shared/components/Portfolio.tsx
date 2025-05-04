@@ -52,7 +52,7 @@ const PortfolioComponent = () => {
                     <Typography textAlign={'justify'}>Lorem ipsum odor amet, consectetuer adipiscing elit. Vehicula massa feugiat lacinia nullam dignissim vulputate. Risus bibendum aliquam donec ante dictum sagittis. Mauris senectus ridiculus nascetur parturient; per parturient fusce molestie? Orci condimentum nostra fames consequat nisl. Non lacinia nunc netus litora torquent hac nostra sapien. Dolor in netus et rhoncus neque dis nam.</Typography>
                     <Typography fontFamily={'Staatliches'} color={theme.palette.primary.main}> ➞ ler mais </Typography>
                 </Box>
-                <Box sx={(theme) => ProjectItem(theme, smallScreen || mediumScreen ? '-30px' : '30px')} {...(smallScreen || mediumScreen ? { width: smallScreen? '80%' : '70%' } : { width: theme.spacing(120) })}>
+                <Box sx={(theme) => ProjectItem(theme, smallScreen || mediumScreen ? '-8%' : '30px')} {...(smallScreen || mediumScreen ? { width: smallScreen? '80%' : '70%' } : { width: theme.spacing(120) })}>
                     <img src={`/images/projetcEx.png`} style={{ width: '100%', height: 'auto' }} />
                 </Box>
             </Box>

@@ -3,6 +3,7 @@ import { useAppThemeContext } from "../../context";
 
 const CoverComponent = () => {
     const theme = useTheme();
+    const miniScreen = useMediaQuery("(max-width:380px)");
     const smallScreen = useMediaQuery(theme.breakpoints.down("sm"));
     const mediumScreen = useMediaQuery("(max-width:1080px)");
 
@@ -10,7 +11,7 @@ const CoverComponent = () => {
 
     return (
         <Box width={'90%'} display={'flex'} justifyContent={'center'} {...(mediumScreen ? { flexDirection: 'column-reverse', alignItems: 'center', gap: theme.spacing(8) } : null)}>
-            <Box width={theme.spacing(smallScreen ? 50 : theme.spacing(65))} {...(mediumScreen ? { position: 'relative', right: smallScreen ? '0' : '3%' } : null)}>
+            <Box width={theme.spacing(miniScreen? 40 : smallScreen ? 50 : 65)} {...(mediumScreen ? { position: 'relative', right: smallScreen ? '0' : '3%' } : null)}>
                 <img src={`/images/${themeName}Cover.png`} style={{
                     width: '100%',
                     height: 'auto',

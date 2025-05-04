@@ -9,6 +9,7 @@ import { showToast } from "../utils/Toast";
 
 const ContactComponent = () => {
     const theme = useTheme();
+    const miniScreen = useMediaQuery(theme.breakpoints.down("sm"));
     const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
     const mediumScreen = useMediaQuery(theme.breakpoints.between("md", "lg"));
 
@@ -112,14 +113,14 @@ const ContactComponent = () => {
     }
 
     return (
-        <Box bgcolor={theme.palette.secondary.main} width={'100%'} borderRadius={'100px 100px 0px 0px'} display={'flex'} justifyContent={'center'} alignItems={'center'} paddingTop={theme.spacing(3)}>
+        <Box bgcolor={theme.palette.secondary.main} width={'100%'} borderRadius={miniScreen? '60px 60px 0px 0px' : '100px 100px 0px 0px'} display={'flex'} justifyContent={'center'} alignItems={'center'} paddingTop={theme.spacing(3)}>
             <Box width={'95%'} height={'100%'} display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(5)}>
                 <Typography variant="sectionTitle" color={'white'}> Contato </Typography>
                 <Box display={'flex'} width={'100%'} {...(smallScreen || mediumScreen ? { flexWrap: 'wrap', gap: theme.spacing(4) } : null)}>
                     <Box display={'flex'} flexDirection={'column'} gap={theme.spacing(4)}>
                         <Box>
                             <Typography color={'white'} fontFamily={'"Akatab", sans-serif'} fontSize={smallScreen ? theme.spacing(3) : theme.spacing(4)} fontWeight={'500'}>Me envie uma mensagem</Typography>
-                            <Typography color={'white'} width={smallScreen ? '100%' : '70%'} textAlign={'justify'} fontSize={theme.spacing(1.5)} fontWeight={'400'}>Se você quiser entrar em contato comigo, pode fazer isso por telefone, e-mail ou preenchendo o formulário ao lado. Caso escolha o formulário, lembre-se de deixar seu nome e sobrenome, um e-mail válido para que eu possa retornar o contato e, no corpo da mensagem, explique com o máximo de detalhes possível sobre o seu projeto e do que você precisa. Assim, consigo entender melhor suas necessidades e responder de forma mais precisa.</Typography>
+                            <Typography color={'white'} width={smallScreen ? '100%' : '70%'} textAlign={'justify'} fontSize={theme.spacing(1.5)} fontWeight={'400'}>Se você quiser entrar em contato comigo, pode fazer isso por telefone, e-mail ou preenchendo o formulário a seguir. Caso escolha o formulário, lembre-se de deixar seu nome e sobrenome, um e-mail válido para que eu possa retornar o contato e, no corpo da mensagem, explique com o máximo de detalhes possível sobre o seu projeto e do que você precisa. Assim, consigo entender melhor suas necessidades e responder de forma mais precisa.</Typography>
                         </Box>
                         <Box display={'flex'} flexDirection={'column'} gap={theme.spacing(2)}>
                             {InfoData.map((item) => (

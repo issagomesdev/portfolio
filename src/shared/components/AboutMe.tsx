@@ -5,6 +5,7 @@ import { useScrollContext } from "../context/ScrollContext";
 const AboutMeComponent = () => {
 
     const theme = useTheme();
+    const miniScreen = useMediaQuery("(max-width:380px)");
     const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
     const mediumScreen = useMediaQuery(theme.breakpoints.between("md", "lg"));
     const { scrollToSection } = useScrollContext();
@@ -23,7 +24,7 @@ const AboutMeComponent = () => {
                     <Button sx={{ backgroundColor: theme.palette.secondary.main, color: 'white', fontSize: theme.spacing(2.5), paddingX: theme.spacing(3) }} onClick={() => scrollToSection('contactRef')}>Entre em contato</Button>
                 </Box>
                 <Box>
-                    <Box sx={(theme) => ProfilePhoto(theme)} {...(smallScreen ? { width: theme.spacing(35) } : mediumScreen ? { width: theme.spacing(50) } : { width: theme.spacing(60) })}>
+                    <Box sx={(theme) => ProfilePhoto(theme)} width={theme.spacing(miniScreen? 28 : smallScreen ? 35 : mediumScreen ? 50 : 60)}>
                         <img src={`/images/profilePhoto.png`} style={{ width: '100%', height: 'auto' }} />
                     </Box>
                 </Box>

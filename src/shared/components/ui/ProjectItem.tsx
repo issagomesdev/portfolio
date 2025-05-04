@@ -7,7 +7,7 @@ export const ProjectItem = (theme: Theme, right: string) => ({
   '&::before': {
     content: '""',
     position: 'absolute',
-    top: '30px',
+    top: '13%',
     right: right,
     width: '99%',
     height: '95%',

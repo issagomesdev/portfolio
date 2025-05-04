@@ -5,8 +5,8 @@ export const ProfilePhoto = (theme: Theme) => ({
     '&::before': {
       content: '""',
       position: 'absolute',
-      top: '40px',
-      left: '40px',
+      top: '10%',
+      left: '15%',
       width: '100%',
       height: '97%',
       zIndex: '-9',
