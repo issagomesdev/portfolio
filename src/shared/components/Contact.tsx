@@ -133,7 +133,7 @@ const ContactComponent = () => {
 
     return (
         <Box bgcolor={theme.palette.secondary.main} width={'100%'} borderRadius={smallScreen? '60px 60px 0px 0px' : '100px 100px 0px 0px'} display={'flex'} justifyContent={'center'} alignItems={'center'} paddingTop={theme.spacing(3)}>
-            <Box width={'95%'} height={'100%'} display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(5)}>
+            <Box width={smallScreen? '90%': '95%'} height={'100%'} display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(5)}>
                 <Typography variant="sectionTitle" color={'white'}> Contato </Typography>
                 <Box display={'flex'} width={mediumScreen2? '95%' : '100%'} {...(mediumScreen || mediumScreen2 ? { flexWrap: 'wrap', gap: theme.spacing(4) } : null)}>
                     <Box display={'flex'} flexDirection={'column'} gap={theme.spacing(4)}>
