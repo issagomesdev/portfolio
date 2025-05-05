@@ -11,10 +11,12 @@ const CoverComponent = () => {
 
     return (
         <Box width={'90%'} display={'flex'} justifyContent={'center'} {...(mediumScreen ? { flexDirection: 'column-reverse', alignItems: 'center', gap: theme.spacing(8) } : null)}>
-            <Box width={theme.spacing(miniScreen? 40 : smallScreen ? 50 : 65)} {...(mediumScreen ? { position: 'relative', right: smallScreen ? '0' : '3%' } : null)}>
-                <img src={`/images/${themeName}Cover.png`} style={{
+            <Box width={theme.spacing(miniScreen? 40 : smallScreen ? 50 : 65)} height={theme.spacing(miniScreen? 40 : smallScreen ? 50 : 65)} {...(mediumScreen ? { position: 'relative', right: smallScreen ? '0' : '3%' } : null)}>
+                <img key={`${themeName}-Cover`} src={`/images/${themeName}Cover.png`} style={{
                     width: '100%',
                     height: 'auto',
+                    transition: 'opacity 0.3s ease-in-out',
+                    opacity: 1,
                     maskImage: 'linear-gradient(to bottom, black 60%, transparent 90%)',
                     WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
                 }} alt="issa gomes dev" />
@@ -34,10 +36,10 @@ const CoverComponent = () => {
                     WebkitTapHighlightColor: 'transparent'
                 }}>
                     <Box width={theme.spacing(10)}>
-                        <img src={`/images/${themeName}SwitchBody.png`} style={{ width: '100%', height: 'auto' }} />
+                        <img key={`${themeName}-SwitchBody`} src={`/images/${themeName}SwitchBody.png`} style={{ width: '100%', height: 'auto' }} />
                     </Box>
                     <Box width={theme.spacing(4)} position={'absolute'} top={2} {...(themeName === 'light' ? { right: 2 } : { left: 2 })}>
-                        <img src={`/images/${themeName}Switch.png`} style={{ width: '100%', height: 'auto' }} />
+                        <img key={`${themeName}-Switch`} src={`/images/${themeName}Switch.png`} style={{ width: '100%', height: 'auto' }} />
                     </Box>
                 </Box>
             </Box>

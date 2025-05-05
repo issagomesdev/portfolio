@@ -3,6 +3,7 @@ import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 const ExperiencieComponent = () => {
     const theme = useTheme();
     const smallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+    const smallScreen2 = useMediaQuery("(max-width:425px)");
     const mediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
     type ExpItem = {
@@ -121,9 +122,9 @@ const ExperiencieComponent = () => {
 
     const ExpComponent = ({ title, icon }: ExpItem) => {
         return (
-            <Box flex={mediumScreen ? '1 1 33.3%' : '0 0 calc(20%)'} display={'flex'} flexDirection={'column'} justifyContent={'flex-end'} alignItems={'center'} gap={theme.spacing(3)}>
+            <Box width={mediumScreen? '33.3%' : '20%'} display={'flex'} flexDirection={'column'} justifyContent={'flex-end'} alignItems={'center'} gap={theme.spacing(3)}>
                 <Icon icon={icon} width={smallScreen? theme.spacing(5) : mediumScreen? theme.spacing(10) : theme.spacing(13)} />
-                <Typography textAlign={'center'}>{title}</Typography>
+                <Typography textAlign={'center'} sx={{wordBreak: 'break-all'}} {...(smallScreen2? {fontSize: theme.spacing(1.5)} : {})}>{title}</Typography>
             </Box>
         )
     }

@@ -4,9 +4,10 @@ import { useAppThemeContext } from "../context";
 
 const ServicesComponent = () => {
     const theme = useTheme();
-    const miniScreen = useMediaQuery("(max-width:450px)");
-    const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
-    const mediumScreen = useMediaQuery("(max-width:1200px)");
+    const smallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+    const smallScreen2 = useMediaQuery("(max-width:450px)");
+    const mediumScreen = useMediaQuery(theme.breakpoints.down("md"));
+    const mediumScreen2 = useMediaQuery("(max-width:1200px)");
     
     const { themeName } = useAppThemeContext();
 
@@ -51,24 +52,26 @@ const ServicesComponent = () => {
 
     const ServiceComponent = (service: Service) => {
         return (
-            <Box display={'flex'} flexDirection={'column'} padding={theme.spacing(3)} gap={theme.spacing(3)} bgcolor={theme.palette.background.paper} borderRadius={'4px'} boxShadow={themeName === 'light' ? 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' : 'none'} width={'45%'}>
-                <Box display={'flex'} gap={theme.spacing(2)} alignItems={'center'} {...(mediumScreen ? { flexDirection: 'column' } : { flexDirection: 'row' })}>
+            <Box display={'flex'} flexDirection={'column'} padding={theme.spacing(3)} gap={theme.spacing(3)} bgcolor={theme.palette.background.paper} borderRadius={'4px'} boxShadow={themeName === 'light' ? 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' : 'none'} width={smallScreen? '90%' : '45%'}>
+                <Box display={'flex'} gap={theme.spacing(2)} alignItems={'center'} {...(mediumScreen2 ? { flexDirection: 'column' } : { flexDirection: 'row' })}>
                     <Box padding={theme.spacing(2)} bgcolor={theme.palette.secondary.main} color={theme.palette.background.paper} borderRadius={'100%'} position={'relative'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
-                        <Icon icon={service.icon} width={smallScreen ? theme.spacing(5) : theme.spacing(8)} />
+                        <Icon icon={service.icon} width={mediumScreen ? theme.spacing(5) : theme.spacing(8)} />
                     </Box>
-                    {smallScreen ? <Box> <Typography color={theme.palette.secondary.main} textTransform={'uppercase'} fontFamily={'Staatliches'} fontSize={theme.spacing(miniScreen? 3 : smallScreen ? 4 : 6)} lineHeight={smallScreen ? theme.spacing(4) : theme.spacing(6)} textAlign={mediumScreen ? 'center' : 'start'} sx={{ wordBreak: 'break-word' }} alignItems={'baseline'}>{`${service.title} ${service.cotitle}`}</Typography> </Box> : <Box> <Typography color={theme.palette.secondary.main} textTransform={'uppercase'} fontFamily={'Staatliches'} fontSize={smallScreen ? theme.spacing(4) : theme.spacing(6)} lineHeight={smallScreen ? theme.spacing(4) : theme.spacing(6)} textAlign={mediumScreen ? 'center' : 'start'} sx={{ wordBreak: 'break-word' }}>{service.title}</Typography>
-                        <Typography color={theme.palette.secondary.main} textTransform={'uppercase'} fontFamily={'Staatliches'} fontSize={smallScreen ? theme.spacing(4) : theme.spacing(6)} lineHeight={smallScreen ? theme.spacing(4) : theme.spacing(6)} textAlign={mediumScreen ? 'center' : 'start'} sx={{ wordBreak: 'break-word' }}>{service.cotitle}</Typography> </Box>}
+
+                    
+                    {mediumScreen ? <Box> <Typography color={theme.palette.secondary.main} textTransform={'uppercase'} fontFamily={'Staatliches'} fontSize={theme.spacing(smallScreen2? 3 : mediumScreen ? 4 : 6)} lineHeight={theme.spacing(smallScreen? 3 : mediumScreen ? 4 : 6)} textAlign={mediumScreen2 ? 'center' : 'start'} sx={{ wordBreak: 'break-word' }} alignItems={'baseline'}>{`${service.title} ${service.cotitle}`}</Typography> </Box> : <Box> <Typography color={theme.palette.secondary.main} textTransform={'uppercase'} fontFamily={'Staatliches'} fontSize={mediumScreen ? theme.spacing(4) : theme.spacing(6)} lineHeight={mediumScreen ? theme.spacing(4) : theme.spacing(6)} textAlign={mediumScreen2 ? 'center' : 'start'} sx={{ wordBreak: 'break-word' }}>{service.title}</Typography>
+                        <Typography color={theme.palette.secondary.main} textTransform={'uppercase'} fontFamily={'Staatliches'} fontSize={mediumScreen ? theme.spacing(4) : theme.spacing(6)} lineHeight={mediumScreen ? theme.spacing(4) : theme.spacing(6)} textAlign={mediumScreen2 ? 'center' : 'start'} sx={{ wordBreak: 'break-word' }}>{service.cotitle}</Typography> </Box>}
 
                 </Box>
-                <Typography textAlign={'justify'} color={theme.palette.secondary.main} {...(smallScreen ? { fontSize: theme.spacing(1.5) } : {})}>{service.description}</Typography>
+                <Typography textAlign={'justify'} color={theme.palette.secondary.main} {...(mediumScreen ? { fontSize: theme.spacing(1.5) } : {})}>{service.description}</Typography>
             </Box>
         )
     }
 
     return (
-        <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(8)}>
+        <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(4)}>
             <Typography variant="sectionTitle"> Serviços </Typography>
-            <Box display={'flex'} flexWrap={'wrap'} justifyContent={'space-evenly'} width={'95%'} rowGap={theme.spacing(5)}>
+            <Box display={'flex'} flexWrap={'wrap'} justifyContent={'space-evenly'} width={'95%'} rowGap={smallScreen? theme.spacing(4) : theme.spacing(5)}>
                 {ServiceData.map((service) => (
                     <ServiceComponent key={service.id} {...service} />
                 ))}

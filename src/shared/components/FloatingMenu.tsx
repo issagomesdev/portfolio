@@ -24,16 +24,16 @@ const FloatingMenu = () => {
     }
 
     return (
-        <Box position={'fixed'} bottom={10} right={10} display={'flex'} flexDirection={'row-reverse'} alignItems={'center'} gap={2} padding={1} zIndex={100}>
+        <Box position={'fixed'} bottom={10} right={10} display={'flex'} flexDirection={'column-reverse'} alignItems={'flex-end'} gap={2} padding={1} zIndex={100}>
             <Box onClick={() => setStatus(!status)} display={'flex'} flexDirection={'column'} gap={1} padding={1} zIndex={100} bgcolor={theme.palette.secondary.main} borderRadius={10} boxShadow={theme.shadows[3]} sx={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}>
                 <Icon icon={status ? 'line-md:menu-to-close-alt-transition' : 'proicons:apps'} width={theme.spacing(4)} color={theme.palette.background.default} />
             </Box>
             <AnimatePresence>
                 {status && (
-                    <Box component={motion.div} display="flex" gap={1} zIndex={100}
+                    <Box component={motion.div} display="flex" flexDirection={'column'} gap={1} zIndex={100}
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 20 }}
+                        exit={{ opacity: 0, y: 20 }}
                         transition={{ staggerChildren: 0.1 }}
                     >
                         {sections.map((item, index) => (
