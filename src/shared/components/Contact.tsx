@@ -72,12 +72,12 @@ const ContactComponent = () => {
     const InfoData: CardItem[] = [
         {
             id: 1,
-            text: '+55 81 9 93852292',
-            icon: 'icon-park-twotone:phone-telephone'
+            text: '+55 81 994566887',
+            icon: 'ic:baseline-whatsapp'
         },
         {
             id: 2,
-            text: 'codedbyissa@gmail.com',
+            text: 'byissag@gmail.com',
             icon: 'ic:twotone-email'
         },
         {
@@ -139,7 +139,7 @@ const ContactComponent = () => {
                     <Box display={'flex'} flexDirection={'column'} gap={theme.spacing(4)}>
                         <Box>
                             <Typography color={'white'} fontFamily={'"Akatab", sans-serif'} fontSize={mediumScreen ? theme.spacing(3) : theme.spacing(4)} fontWeight={'500'}>Me envie uma mensagem</Typography>
-                            <Typography color={'white'} width={mediumScreen ? '100%' : '70%'} textAlign={'justify'} fontSize={theme.spacing(1.5)} fontWeight={'400'}>Se você quiser entrar em contato comigo, pode fazer isso por telefone, e-mail ou preenchendo o formulário a seguir. Caso escolha o formulário, lembre-se de deixar seu nome e sobrenome, um e-mail válido para que eu possa retornar o contato e, no corpo da mensagem, explique com o máximo de detalhes possível sobre o seu projeto e do que você precisa. Assim, consigo entender melhor suas necessidades e responder de forma mais precisa.</Typography>
+                            <Typography color={'white'} width={mediumScreen ? '100%' : '70%'} textAlign={'justify'} fontSize={theme.spacing(1.5)} fontWeight={'400'}>Se você quiser entrar em contato comigo, pode fazer isso por whatsapp, e-mail ou preenchendo o formulário a seguir. Caso escolha o formulário, lembre-se de deixar seu nome e sobrenome, um e-mail válido para que eu possa retornar o contato e, no corpo da mensagem, explique com o máximo de detalhes possível sobre o seu projeto e do que você precisa. Assim, consigo entender melhor suas necessidades e responder de forma mais precisa.</Typography>
                         </Box>
                         <Box display={'flex'} flexDirection={'column'} gap={theme.spacing(2)}>
                             {InfoData.map((item) => (
