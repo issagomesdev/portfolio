@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CustomTextarea } from "./ui/styles/CustomTextarea";
 import { useForm } from "react-hook-form";
 import { showToast } from "../utils/Toast";
-import { col } from "motion/react-client";
 
 const ContactComponent = () => {
     const theme = useTheme();
