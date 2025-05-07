@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CustomTextarea } from "./ui/styles/CustomTextarea";
 import { useForm } from "react-hook-form";
 import { showToast } from "../utils/Toast";
+import { col } from "motion/react-client";
 
 const ContactComponent = () => {
     const theme = useTheme();
@@ -31,7 +32,7 @@ const ContactComponent = () => {
             id: 2,
             text: 'Instagram',
             icon: 'icon-park-twotone:instagram',
-            link: 'https://www.instagram.com/issagomesdev/'
+            link: 'https://www.instagram.com/issag.dev/'
         },
         {
             id: 3,
@@ -66,19 +67,20 @@ const ContactComponent = () => {
                 </Box>
             </a>
         );
-    };
-    
+    };   
 
     const InfoData: CardItem[] = [
         {
             id: 1,
             text: '+55 81 994566887',
-            icon: 'ic:baseline-whatsapp'
+            icon: 'ic:baseline-whatsapp',
+            link: 'https://wa.me/5581994566887'
         },
         {
             id: 2,
             text: 'byissag@gmail.com',
-            icon: 'ic:twotone-email'
+            icon: 'ic:twotone-email',
+            link: 'mailto:byissag@gmail.com'
         },
         {
             id: 3,
@@ -87,14 +89,16 @@ const ContactComponent = () => {
         }
     ];
 
-    const InfoComponent = ({ text, icon }: CardItem) => {
+    const InfoComponent = ({ text, icon, link }: CardItem) => {
         return (
+            <a href={link} target="_blank" style={{ color: 'white'}} rel="noopener noreferrer">
             <Box display={'flex'} gap={theme.spacing(2)} color={'white'} alignItems={'center'}>
                 <Box sx={{ background: `linear-gradient(to bottom, #9b9d8745 0%, #777865 75%, #7E7F6C 100%)` }} boxShadow={'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'} display={'flex'} alignItems={'center'} borderRadius={'4px'} width={theme.spacing(7)} height={theme.spacing(7)} justifyContent={'center'}>
                     <Icon icon={icon} width={theme.spacing(5)} color={'white'} />
                 </Box>
                 <Typography fontFamily={'"Akatab", sans-serif'}>{text}</Typography>
             </Box>
+            </a>
         )
     }
 
@@ -147,6 +151,7 @@ const ContactComponent = () => {
                                     id={item.id}
                                     text={item.text}
                                     icon={item.icon}
+                                    link={item.link}
                                 />
                             ))}
                         </Box>
