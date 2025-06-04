@@ -6,7 +6,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useScrollContext } from "../context/ScrollContext";
 
-
 const FloatingMenu = () => {
 
     const theme = useTheme();

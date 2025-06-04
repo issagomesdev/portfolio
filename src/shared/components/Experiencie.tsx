@@ -8,123 +8,123 @@ const ExperiencieComponent = () => {
 
     type ExpItem = {
         id: number
-        title: string
+        name: string
         icon: string
     }
 
     const expData: ExpItem[] = [
         {
             id: 1,
-            title: 'aws',
+            name: 'aws',
             icon: 'logos:aws'
         },
         {
             id: 2,
-            title: 'php',
+            name: 'php',
             icon: 'devicon:php'
         },
         {
             id: 3,
-            title: 'laravel',
+            name: 'laravel',
             icon: 'logos:laravel'
         },
         {
             id: 4,
-            title: 'codeigniter',
+            name: 'codeigniter',
             icon: 'logos:codeigniter-icon'
         },
         {
             id: 5,
-            title: 'wordpress',
+            name: 'wordpress',
             icon: 'skill-icons:wordpress'
         },
         {
             id: 6,
-            title: 'javascript',
+            name: 'javascript',
             icon: 'vscode-icons:file-type-js-official'
         },
         {
             id: 7,
-            title: 'typescript',
+            name: 'typescript',
             icon: 'skill-icons:typescript'
         },
         {
             id: 8,
-            title: 'node',
+            name: 'node',
             icon: 'fa-brands:node'
         },
         {
             id: 9,
-            title: 'react',
+            name: 'react',
             icon: 'devicon:react'
         },
         {
             id: 10,
-            title: 'react native',
+            name: 'react native',
             icon: 'devicon:reactnative-wordmark'
         },
         {
             id: 11,
-            title: 'angular',
+            name: 'angular',
             icon: 'vscode-icons:file-type-angular'
         },
         {
             id: 12,
-            title: 'vue',
+            name: 'vue',
             icon: 'logos:vue'
         },
         {
             id: 13,
-            title: 'electron',
+            name: 'electron',
             icon: 'devicon:electron'
         },
         {
             id: 14,
-            title: 'python',
+            name: 'python',
             icon: 'devicon:python-wordmark'
         },
         {
             id: 15,
-            title: 'C++',
+            name: 'C++',
             icon: 'skill-icons:cpp'
         },
         {
             id: 16,
-            title: 'C#',
+            name: 'C#',
             icon: 'skill-icons:cs'
         },
         {
             id: 17,
-            title: 'unity',
+            name: 'unity',
             icon: 'devicon:unity'
         },
         {
             id: 18,
-            title: 'sql',
+            name: 'sql',
             icon: 'ph:file-sql-fill'
         },
         {
             id: 19,
-            title: 'mysql',
+            name: 'mysql',
             icon: 'logos:mysql'
         },
         {
             id: 20,
-            title: 'postgresql',
+            name: 'postgresql',
             icon: 'devicon:postgresql'
         },
         {
             id: 21,
-            title: 'figma',
+            name: 'figma',
             icon: 'devicon:figma'
         }
     ]
 
-    const ExpComponent = ({ title, icon }: ExpItem) => {
+    const ExpComponent = ({ name, icon }: ExpItem) => {
         return (
             <Box width={mediumScreen? '33.3%' : '20%'} display={'flex'} flexDirection={'column'} justifyContent={'flex-end'} alignItems={'center'} gap={theme.spacing(3)}>
                 <Icon icon={icon} width={smallScreen? theme.spacing(5) : mediumScreen? theme.spacing(10) : theme.spacing(13)} />
-                <Typography textAlign={'center'} sx={{wordBreak: 'break-all'}} {...(smallScreen2? {fontSize: theme.spacing(1.5)} : {})}>{title}</Typography>
+                <Typography textAlign={'center'} sx={{wordBreak: 'break-all'}} {...(smallScreen2? {fontSize: theme.spacing(1.5)} : {})}>{name}</Typography>
             </Box>
         )
     }
@@ -138,7 +138,7 @@ const ExperiencieComponent = () => {
                     {expData.map((item) => (
                         <ExpComponent
                             id={item.id}
-                            title={item.title}
+                            name={item.name}
                             icon={item.icon}
                         />
                     ))}

@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { Section } from "../../types/section";
-import { SectionController } from "../../controllers/SectionController";
+import { Section } from "../../types/Section";
+import { SectionController } from "../../controllers/sectionController";
 
 interface ISectionContextData {
     sections: Section[];

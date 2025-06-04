@@ -1,7 +1,7 @@
 import { Box, Button, Typography, useTheme, useMediaQuery } from "@mui/material";
 import LogoComponent from "../ui/components/Logo";
 import FloatingMenu from "../FloatingMenu";
-import { Section } from "../../../types/section";
+import { Section } from "../../../types/Section";
 import { useSectionContext } from "../../context/SectionContext";
 import { useScrollContext } from "../../context/ScrollContext";
 
