@@ -1,6 +1,6 @@
 import { Box, useTheme } from "@mui/material";
 import { Icon } from "@iconify/react";
-import { Section } from "../../types/section";
+import { Section } from "../../types/Section";
 import { useSectionContext } from "../context/SectionContext";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";

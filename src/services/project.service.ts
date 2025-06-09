@@ -7,7 +7,12 @@ type GetProjectsParams = {
   techs?: number[]
 }
 
-export const fetchProjects = async (params?: GetProjectsParams) => {
+export const getProjects = async (params?: GetProjectsParams) => {
   const response = await api.get('/projects', { params })
+  return response.data
+}
+
+export const getProject = async (name: string) => {
+  const response = await api.get(`/projects/${name}`)
   return response.data
 }

@@ -1,17 +1,23 @@
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { ProjectItem } from "./ui/styles/ProjectItem";
 import { Project } from '../../types/Project';
-import { useEffect, useState } from 'react'
-import { getProjects } from '../../controllers/project.controller';
-import { PaginationComponent } from './PaginationComponent'
+import { Category } from '../../types/Category';
+import { useEffect, useState } from 'react';
+import { allProjects } from '../../controllers/project.controller';
+import { getCategories } from "../../controllers/category.controller";
+import { PaginationComponent } from './PaginationComponent';
+import { useNavigate } from 'react-router-dom';
 
 const PortfolioComponent = () => {
 
     const theme = useTheme();
     const mediumScreen = useMediaQuery(theme.breakpoints.down("md"));
     const mediumScreen2 = useMediaQuery(theme.breakpoints.between("md", "lg"));
+    const navigate = useNavigate();
 
     const [projects, setProjects] = useState<Project[]>([])
+    const [categories, setCategories] = useState<Category[]>([])
+    const [categorySelected, setCategorySelected] = useState<number | null>(null)
     const [loading, setLoading] = useState(true)
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
@@ -19,16 +25,17 @@ const PortfolioComponent = () => {
     useEffect(() => {
         async function load() {
             try {
-                const data = await getProjects({ page: page })
-                console.log(data)
-                setProjects(data.data)
-                setTotalPages(Math.ceil(data.total / data.perPage))
+                const dataProjects = await allProjects({ page: page, categories: categorySelected })
+                setProjects(dataProjects.data)
+                setTotalPages(Math.ceil(dataProjects.total / dataProjects.perPage))
+                const dataCategories = await getCategories();
+                setCategories(dataCategories.data);
             } finally {
                 setLoading(false)
             }
         }
         load()
-    }, [page])
+    }, [page, categorySelected])
 
     const ProjectComponent = (project: Project) => {
         return (
@@ -39,7 +46,7 @@ const PortfolioComponent = () => {
                         <Typography variant="projectName" textAlign={(mediumScreen || mediumScreen2) && project.id % 2 === 0 ? 'end' : 'start'} {...(mediumScreen ? { fontSize: theme.spacing(3.5), lineHeight: theme.spacing(3.5) } : {})}>{project.name}</Typography>
                     </Box>
                     <Typography textAlign={'justify'}>{project.description}</Typography>
-                    <Typography fontFamily={'Staatliches'} color={theme.palette.primary.main}> ➞ ler mais </Typography>
+                    <Typography fontFamily={'Staatliches'} color={theme.palette.primary.main} sx={{ cursor: 'pointer' }} onClick={() => navigate(`/project/${project.name}`)}> ➞ ler mais </Typography>
                 </Box>
                 <Box sx={(theme) => ProjectItem(theme, mediumScreen || mediumScreen2 ? '-8%' : '30px')} {...(mediumScreen || mediumScreen2 ? { width: mediumScreen ? '80%' : '70%' } : { width: theme.spacing(120) })}>
                     <img src={project.imageUrl} style={{ width: '100%', height: 'auto' }} />
@@ -53,19 +60,15 @@ const PortfolioComponent = () => {
             <Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(2)}>
                 <Typography variant="sectionTitle"> Portfolio </Typography>
                 <Box display={'flex'} width={'fit-content'} marginX={theme.spacing(1.5)} {...(mediumScreen ? { justifyContent: 'center', flexWrap: 'wrap' } : { justifyContent: 'space-between' })} columnGap={theme.spacing(4)}>
-                    <Typography variant="projectType" color={theme.palette.primary.main}> Web </Typography>
-                    <Typography variant="projectType"> Desktop </Typography>
-                    <Typography variant="projectType"> Mobile </Typography>
-                    <Typography variant="projectType"> Games </Typography>
-                    <Typography variant="projectType"> Others </Typography>
+                    <Typography sx={{ cursor: 'pointer' }} variant="projectType" {...(categorySelected === null ? { color: theme.palette.primary.main } : null)} onClick={() => setCategorySelected(null)}> Todos </Typography>
+                    {!loading ? categories.map((category) => (
+                        <Typography sx={{ cursor: 'pointer' }} key={category.id} variant="projectType" {...(category.id == categorySelected ? { color: theme.palette.primary.main } : null)} onClick={() => setCategorySelected(category.id)}> {category.name} </Typography>
+                    )) : null}
                 </Box>
             </Box>
             <Box display={'flex'} gap={mediumScreen || mediumScreen2 ? theme.spacing(9) : theme.spacing(15)} flexDirection={'column'} alignItems={'center'}>
-                {loading? <Typography> carregando... </Typography> : projects.map((project) => (
-                    <ProjectComponent key={project.id} {...project} />
-                ))}
-
-                <PaginationComponent totalPages={8} currentPage={page} onPageChange={setPage} />
+                {loading ? <Typography> carregando... </Typography> : projects.length < 1 ? <Typography width={'80%'} align={'center'} padding={theme.spacing(3)} bgcolor={theme.palette.background.paper}> Projetos incríveis estão sendo desenvolvidos! Dê uma passada aqui mais tarde ou entre em contato para saber mais. </Typography> : projects.map((project) => (<ProjectComponent key={project.id} {...project} />))}
+                <PaginationComponent totalPages={totalPages} currentPage={page} onPageChange={setPage} />
             </Box>
         </Box>
     )

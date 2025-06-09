@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, useTheme, Button, useMediaQuery } from '@mui/material'
+import { Box, useTheme, Button } from '@mui/material'
 import { Icon } from "@iconify/react";
 
 type PaginationComponentProps = {

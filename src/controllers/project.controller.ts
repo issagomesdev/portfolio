@@ -1,5 +1,10 @@
-import { fetchProjects } from '../services/project.service'
+import { getProjects, getProject } from '../services/project.service'
 
-export const getProjects = async (filters = {}) => {
-  return await fetchProjects(filters)
+export const allProjects = async (filters = {}) => {
+  return await getProjects(filters)
 }
+
+export const projectByName = async (name: string) => {
+  return await getProject(name)
+}
+
