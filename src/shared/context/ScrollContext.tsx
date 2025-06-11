@@ -26,11 +26,11 @@ export const ScrollProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
   const getOffset = () => {
     if (window.innerWidth < 600) {
-      return 10;
+      return 5;
     } else if (window.innerWidth < 960) { 
-      return 20;
+      return 10;
     } else { 
-      return 110;
+      return 100;
     }
   };
 

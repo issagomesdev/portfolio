@@ -1,18 +1,53 @@
 import { Box, useTheme, useMediaQuery } from '@mui/system';
+import { Modal } from '@mui/material';
+import { useEffect, useState } from 'react';
 import HeaderComponent from '../shared/components/home/Header';
 import CoverComponent from '../shared/components/home/Cover';
 import AboutMeComponent from '../shared/components/AboutMe';
+import { useParams } from 'react-router-dom';
 import PortfolioComponent from '../shared/components/Portfolio';
 import ServicesComponent from '../shared/components/Services';
 import ExperiencieComponent from '../shared/components/Experiencie';
 import ContactComponent from '../shared/components/Contact';
+import ProjectComponent from '../shared/components/Project';
 import { useScrollContext } from '../shared/context/ScrollContext';
+import { projectByName } from '../controllers/project.controller';
+import { useSectionContext } from "../shared/context/SectionContext";
+import { Project } from '../types/Project';
 
 function App() {
+  const { name } = useParams<{ name: string }>();
+  const [project, setProject] = useState<Project>();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const theme = useTheme();
   const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
   const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
-  const { refs } = useScrollContext();
+  const { refs, scrollToSection } = useScrollContext();
+  const { sections, toggleSection } = useSectionContext();
+
+  async function openProject(name: string) {
+    try {
+      const data = await projectByName(name);
+      setProject(data);
+      scrollToSection('portfolioRef')
+      const section = sections.find(item => item.id === 'portfolioRef');
+      if (section) {
+        toggleSection(section);
+      }
+      setTimeout(() => {
+        handleOpen();
+      }, 1000);
+    } catch (error) {
+      console.error('Erro ao carregar projeto:', error);
+    }
+  }
+
+  useEffect(() => {
+    if (!name) return;
+    openProject(name);
+  }, [name]);
 
   return (
     <Box display={'flex'} flexDirection={'column'} rowGap={theme.spacing(smallScreen ? 8 : mediumScreen ? 10 : 15)} alignItems={'center'} paddingTop={theme.spacing(3)}>
@@ -34,12 +69,22 @@ function App() {
         <Box marginTop={smallScreen ? '' : theme.spacing(15)} width={'100%'} display={'flex'} justifyContent={'center'}>
           <CoverComponent />
         </Box>
+
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-titulo"
+          aria-describedby="modal-descricao"
+        >
+          <ProjectComponent project={project} closeProject={handleClose} />
+        </Modal>
+
       </Box>
       <Box ref={refs.aboutRef} id="aboutRef">
         <AboutMeComponent />
       </Box>
       <Box ref={refs.portfolioRef} id="portfolioRef">
-        <PortfolioComponent />
+        <PortfolioComponent openProject={openProject} />
       </Box>
       <Box ref={refs.servicesRef} id="servicesRef">
         <ServicesComponent />

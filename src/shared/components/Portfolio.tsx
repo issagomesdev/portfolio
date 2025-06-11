@@ -6,14 +6,16 @@ import { useEffect, useState } from 'react';
 import { allProjects } from '../../controllers/project.controller';
 import { getCategories } from "../../controllers/category.controller";
 import { PaginationComponent } from './PaginationComponent';
-import { useNavigate } from 'react-router-dom';
 
-const PortfolioComponent = () => {
+type Props = {
+  openProject: (name: string) => void;
+};
+
+const PortfolioComponent = ({ openProject }: Props) => {
 
     const theme = useTheme();
     const mediumScreen = useMediaQuery(theme.breakpoints.down("md"));
     const mediumScreen2 = useMediaQuery(theme.breakpoints.between("md", "lg"));
-    const navigate = useNavigate();
 
     const [projects, setProjects] = useState<Project[]>([])
     const [categories, setCategories] = useState<Category[]>([])
@@ -46,7 +48,7 @@ const PortfolioComponent = () => {
                         <Typography variant="projectName" textAlign={(mediumScreen || mediumScreen2) && project.id % 2 === 0 ? 'end' : 'start'} {...(mediumScreen ? { fontSize: theme.spacing(3.5), lineHeight: theme.spacing(3.5) } : {})}>{project.name}</Typography>
                     </Box>
                     <Typography textAlign={'justify'}>{project.description}</Typography>
-                    <Typography fontFamily={'Staatliches'} color={theme.palette.primary.main} sx={{ cursor: 'pointer' }} onClick={() => navigate(`/project/${project.name}`)}> ➞ ler mais </Typography>
+                    <Typography fontFamily={'Staatliches'} color={theme.palette.primary.main} sx={{ cursor: 'pointer' }} onClick={() => openProject(project.name)}> ➞ ler mais </Typography>
                 </Box>
                 <Box sx={(theme) => ProjectItem(theme, mediumScreen || mediumScreen2 ? '-8%' : '30px')} {...(mediumScreen || mediumScreen2 ? { width: mediumScreen ? '80%' : '70%' } : { width: theme.spacing(120) })}>
                     <img src={project.imageUrl} style={{ width: '100%', height: 'auto' }} />
