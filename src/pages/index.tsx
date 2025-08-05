@@ -19,8 +19,6 @@ function App() {
   const { name } = useParams<{ name: string }>();
   const [project, setProject] = useState<Project>();
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const theme = useTheme();
   const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
   const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
@@ -34,11 +32,9 @@ function App() {
       scrollToSection('portfolioRef')
       const section = sections.find(item => item.id === 'portfolioRef');
       if (section) {
+        setOpen(true)
         toggleSection(section);
       }
-      setTimeout(() => {
-        handleOpen();
-      }, 1000);
     } catch (error) {
       console.error('Erro ao carregar projeto:', error);
     }
@@ -72,11 +68,11 @@ function App() {
 
         <Modal
           open={open}
-          onClose={handleClose}
+          onClose={() => setOpen(false)}
           aria-labelledby="modal-titulo"
           aria-describedby="modal-descricao"
         >
-          <ProjectComponent project={project} closeProject={handleClose} />
+          <ProjectComponent project={project} closeProject={() => setOpen(false)} />
         </Modal>
 
       </Box>

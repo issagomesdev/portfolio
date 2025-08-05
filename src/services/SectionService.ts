@@ -1,4 +1,4 @@
-import { Section } from "../types/section";
+import { Section } from "../types/Section";
 
 export const SectionService = {
     getSections(): Section[] {  
