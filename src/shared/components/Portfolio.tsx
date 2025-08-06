@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme, useMediaQuery, colors } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { ProjectItem } from "./ui/styles/ProjectItem";
 import { Project } from '../../types/Project';
 import { Category } from '../../types/Category';
