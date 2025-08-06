@@ -1,7 +1,7 @@
-import { Box, Button, Container } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-export const ModalContainer = styled(Box)(({ theme }) => ({
+export const ModalContainer = styled(Box)(() => ({
   width: '100%',
   height: '100%',
   padding: '1rem',
@@ -45,7 +45,7 @@ export const ProjectContent = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const Close = styled(Button)(({ theme }) => ({
+export const Close = styled(Button)(() => ({
   color: '#fff',
   fontSize: '18px',
   backgroundColor: '#e33528'
