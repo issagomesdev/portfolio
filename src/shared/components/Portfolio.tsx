@@ -15,7 +15,7 @@ type Props = {
     openProject: (name: string) => void;
 };
 
-function ProjectCard({ project, index, openProject, ProjectItem }: {
+function ProjectCard({ project, openProject, ProjectItem }: {
     project: Project;
     index: number;
     openProject: (name: string) => void;
