@@ -16,7 +16,6 @@ const ExperiencieComponent = () => {
         async function load() {
             try {
                 const data = await getTechs()
-                console.log(data)
                 setTechs(data.data)
             } finally {
                 setLoading(false)

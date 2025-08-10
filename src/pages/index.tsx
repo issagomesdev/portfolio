@@ -1,5 +1,5 @@
 import { Box, useTheme, useMediaQuery } from '@mui/system';
-import { Modal } from '@mui/material';
+import { Modal, Backdrop, CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import HeaderComponent from '../shared/components/home/Header';
 import CoverComponent from '../shared/components/home/Cover';
@@ -12,7 +12,6 @@ import ContactComponent from '../shared/components/Contact';
 import ProjectComponent from '../shared/components/Project';
 import { useScrollContext } from '../shared/context/ScrollContext';
 import { projectByName } from '../controllers/project.controller';
-import { useSectionContext } from "../shared/context/SectionContext";
 import { Project } from '../types/Project';
 
 function App() {
@@ -20,21 +19,18 @@ function App() {
   const [project, setProject] = useState<Project>();
   const [open, setOpen] = useState(false);
   const theme = useTheme();
+  const [opening, setOpening] = useState(false);
   const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
   const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
-  const { refs, scrollToSection } = useScrollContext();
-  const { sections, toggleSection } = useSectionContext();
+  const { refs } = useScrollContext();
 
   async function openProject(name: string) {
+    setOpening(true);
     try {
       const data = await projectByName(name);
+      setOpen(true)
       setProject(data);
-      scrollToSection('portfolioRef')
-      const section = sections.find(item => item.id === 'portfolioRef');
-      if (section) {
-        setOpen(true)
-        toggleSection(section);
-      }
+      setOpening(false);
     } catch (error) {
       console.error('Erro ao carregar projeto:', error);
     }
@@ -46,8 +42,8 @@ function App() {
   }, [name]);
 
   return (
-    <Box display={'flex'} flexDirection={'column'} rowGap={theme.spacing(smallScreen ? 8 : mediumScreen ? 10 : 15)} alignItems={'center'} paddingTop={theme.spacing(3)}>
-      <Box ref={refs.homeRef} id="homeRef" width={'90%'} display={'flex'} flexDirection={'column'} rowGap={theme.spacing(smallScreen || mediumScreen ? 10 : 15)} alignItems={'center'}>
+    <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
+      <Box ref={refs.homeRef} id="homeRef" width={'90%'} display={'flex'} flexDirection={'column'} rowGap={theme.spacing(smallScreen || mediumScreen ? 10 : 15)} alignItems={'center'} paddingTop={theme.spacing(3)}>
         <Box sx={mediumScreen ? {
           position: 'fixed',
           top: 0,
@@ -66,29 +62,28 @@ function App() {
           <CoverComponent />
         </Box>
 
-        <Modal
-          open={open}
-          onClose={() => setOpen(false)}
-          aria-labelledby="modal-titulo"
-          aria-describedby="modal-descricao"
-        >
+        <Modal open={open} onClose={() => setOpen(false)}>
           <ProjectComponent project={project} closeProject={() => setOpen(false)} />
         </Modal>
 
+        <Backdrop open={opening} sx={{ color: '#fff', zIndex: (t) => t.zIndex.modal + 1 }}>
+          <CircularProgress />
+        </Backdrop>
+
       </Box>
-      <Box ref={refs.aboutRef} id="aboutRef">
+      <Box ref={refs.aboutRef} id="aboutRef" paddingTop={theme.spacing(smallScreen ? 8 : mediumScreen ? 10 : 15)}>
         <AboutMeComponent />
       </Box>
-      <Box ref={refs.portfolioRef} id="portfolioRef">
+      <Box ref={refs.portfolioRef} id="portfolioRef" paddingTop={theme.spacing(smallScreen ? 8 : mediumScreen ? 10 : 15)}>
         <PortfolioComponent openProject={openProject} />
       </Box>
-      <Box ref={refs.servicesRef} id="servicesRef">
+      <Box ref={refs.servicesRef} id="servicesRef" paddingTop={theme.spacing(smallScreen ? 8 : mediumScreen ? 10 : 15)}>
         <ServicesComponent />
       </Box>
-      <Box ref={refs.experienceRef} id="experienceRef">
+      <Box ref={refs.experienceRef} id="experienceRef" paddingTop={theme.spacing(smallScreen ? 8 : mediumScreen ? 10 : 15)}>
         <ExperiencieComponent />
       </Box>
-      <Box ref={refs.contactRef} id="contactRef">
+      <Box ref={refs.contactRef} id="contactRef" paddingTop={theme.spacing(smallScreen ? 8 : mediumScreen ? 10 : 15)}>
         <ContactComponent />
       </Box>
     </Box>

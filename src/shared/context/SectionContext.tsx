@@ -45,7 +45,7 @@ export const SectionProvider: React.FC<ISectionProviderProps> = ({ children }) =
         if (sections.length === 0 || !scrollControl) return;
 
         const handleScroll = () => {
-            const scrollPosition = window.scrollY + 100;
+            const scrollPosition = window.scrollY + (window.innerWidth < 900? 0 : 100);
 
             for (const sec of sections) {
                 const element = document.getElementById(sec.id);

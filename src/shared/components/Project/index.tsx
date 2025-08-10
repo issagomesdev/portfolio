@@ -1,5 +1,6 @@
 
 import { Project } from '../../../types/Project';
+import { Box, CircularProgress, useTheme } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
@@ -16,13 +17,17 @@ type Props = {
 const ProjectComponent = ({ project, closeProject }: Props) => {
 
   const [content, setContent] = useState('');
+  const [loading, setLoading] = useState(false);
+  const theme = useTheme();
 
   useEffect(() => {
     async function getContent() {
+      setLoading(true)
       if (project?.content_file) {
         try {
           const res = await files.get(`/files/${project.content_file}`);
           setContent(res.data);
+          setLoading(false)
         } catch (error) {
           console.error('Erro ao carregar o conteúdo do projeto:', error);
           setContent('Erro ao carregar o conteúdo.');
@@ -38,15 +43,26 @@ const ProjectComponent = ({ project, closeProject }: Props) => {
   return (
     <ModalContainer>
       <Close onClick={closeProject}>
-         <Icon icon={`material-symbols:close-rounded`} width={20} />
+        <Icon icon={`material-symbols:close-rounded`} width={20} />
       </Close>
-    <ProjectContainer>
-      <ProjectContent>
-        <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
-          {content ?? 'Nenhum conteúdo disponível.'}
-        </ReactMarkdown>
-      </ProjectContent>
-    </ProjectContainer>
+      <ProjectContainer>
+        <ProjectContent>
+
+          {loading && <Box sx={{
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <CircularProgress sx={{ color: theme.palette.secondary.main }} />
+            </Box>}
+
+          <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
+            {content ?? 'Nenhum conteúdo disponível.'}
+          </ReactMarkdown>
+        </ProjectContent>
+      </ProjectContainer>
     </ModalContainer>
   );
 };

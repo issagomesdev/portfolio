@@ -14,7 +14,6 @@ const HeaderComponent = () => {
     const { scrollToSection } = useScrollContext();
 
     const MenuItemComponent = (item: Section) => {
-
         return (
             <Box sx={{ cursor: 'pointer' }}>
                 <Typography variant="menuItem" onClick={() => { toggleSection(item); scrollToSection(item.id) }} {...(mediumScreen ? { display: 'none' } : largerScreen ? { fontSize: theme.spacing(2) } : null)} color={section?.id == item.id ? theme.palette.primary.main : theme.palette.secondary.main}>{item.name}</Typography>
