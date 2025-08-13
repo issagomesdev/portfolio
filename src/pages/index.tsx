@@ -28,11 +28,15 @@ function App() {
     setOpening(true);
     try {
       const data = await projectByName(name);
-      setOpen(true)
-      setProject(data);
-      setOpening(false);
+      if (data) {
+        setOpen(true)
+        setProject(data);
+      }
     } catch (error) {
       console.error('Erro ao carregar projeto:', error);
+      window.history.replaceState(null, '', '/');
+    } finally {
+      setOpening(false);
     }
   }
 
@@ -63,7 +67,10 @@ function App() {
         </Box>
 
         <Modal open={open} onClose={() => setOpen(false)}>
-          <ProjectComponent project={project} closeProject={() => setOpen(false)} />
+          <ProjectComponent project={project} closeProject={() => {
+            setOpen(false);
+            window.history.replaceState(null, '', `/`);
+          }} />
         </Modal>
 
         <Backdrop open={opening} sx={{ color: '#fff', zIndex: (t) => t.zIndex.modal + 1 }}>

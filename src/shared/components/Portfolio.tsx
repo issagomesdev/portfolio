@@ -64,7 +64,10 @@ function ProjectCard({ project, openProject, ProjectItem }: {
                     fontFamily="Staatliches"
                     color={theme.palette.primary.main}
                     sx={{ cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}
-                    onClick={() => openProject(project.name)}
+                    onClick={() => {
+                        openProject(project.name)
+                        window.history.replaceState(null, '', '' + `/project/${encodeURIComponent(project.name)}`);
+                    }}
                 >
                     ➞ ler mais
                 </Typography>
