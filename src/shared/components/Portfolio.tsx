@@ -9,7 +9,6 @@ import { PaginationComponent } from './PaginationComponent';
 import { Icon } from "@iconify/react";
 import ImageWithSkeleton from "./Skeleton/ImageWithSkeleton";
 import React from "react";
-import { useScrollContext } from "../context/ScrollContext";
 
 type Props = {
     openProject: (name: string) => void;
@@ -98,13 +97,11 @@ const PortfolioComponent = ({ openProject }: Props) => {
     const [loading, setLoading] = useState(true)
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
-    const { scrollToSection } = useScrollContext();
 
     React.useEffect(() => {
         let active = true;
         async function load() {
             setLoading(true);
-            scrollToSection('portfolioRef')
             try {
                 const dataProjects = await allProjects({ page, categories: categorySelected });
                 const dataCategories = await getCategories();

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, useTheme, Button } from '@mui/material'
 import { Icon } from "@iconify/react";
+import { useScrollContext } from '../context/ScrollContext';
 
 type PaginationComponentProps = {
     totalPages: number
@@ -17,6 +18,7 @@ export const PaginationComponent: React.FC<PaginationComponentProps> = ({
 }) => {
 
     const theme = useTheme();
+    const { scrollToSection } = useScrollContext();
 
     const getPages = () => {
         const pages: number[] = []
@@ -39,6 +41,7 @@ export const PaginationComponent: React.FC<PaginationComponentProps> = ({
         if (page < 1) page = 1
         if (page > totalPages) page = totalPages
         if (page !== currentPage) {
+            scrollToSection('portfolioRef')
             onPageChange(page)
         }
     }
