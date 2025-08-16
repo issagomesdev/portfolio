@@ -9,7 +9,6 @@ import { PaginationComponent } from './PaginationComponent';
 import { Icon } from "@iconify/react";
 import ImageWithSkeleton from "./Skeleton/ImageWithSkeleton";
 import React from "react";
-import { set } from "zod";
 
 type Props = {
     openProject: (name: string) => void;
