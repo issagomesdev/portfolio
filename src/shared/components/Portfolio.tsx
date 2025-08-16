@@ -2,7 +2,7 @@ import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { ProjectItem } from "./ui/styles/ProjectItem";
 import { Project } from '../../types/Project';
 import { Category } from '../../types/Category';
-import { useState } from 'react';
+import { forwardRef, useRef, useState } from 'react';
 import { allProjects } from '../../controllers/project.controller';
 import { getCategories } from "../../controllers/category.controller";
 import { PaginationComponent } from './PaginationComponent';
@@ -14,18 +14,19 @@ type Props = {
     openProject: (name: string) => void;
 };
 
-function ProjectCard({ project, openProject, ProjectItem }: {
+const ProjectCard = forwardRef<HTMLDivElement, {
     project: Project;
     index: number;
     openProject: (name: string) => void;
     ProjectItem: (theme: any, offset: string) => any;
-}) {
+}>(({ project, openProject, ProjectItem }, ref) => {
     const theme = useTheme();
     const mediumScreen = useMediaQuery(theme.breakpoints.down('md'));
     const mediumScreen2 = useMediaQuery(theme.breakpoints.between('md', 'lg'));
 
     return (
         <Box
+            ref={ref}
             display="flex"
             width={mediumScreen ? '80%' : '60%'}
             gap={(mediumScreen || mediumScreen2) ? theme.spacing(7) : theme.spacing(8)}
@@ -83,7 +84,7 @@ function ProjectCard({ project, openProject, ProjectItem }: {
             </Box>
         </Box>
     );
-}
+});
 
 const PortfolioComponent = ({ openProject }: Props) => {
 
@@ -97,6 +98,16 @@ const PortfolioComponent = ({ openProject }: Props) => {
     const [loading, setLoading] = useState(true)
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
+    const firstProjectRef = useRef<HTMLDivElement | null>(null);
+
+    const scrollToFirst = () => {
+        if (!firstProjectRef.current) return;
+        const top = firstProjectRef.current.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+            top: top - (mediumScreen ? 40 : 120),
+            behavior: "smooth"
+        });
+    };
 
     React.useEffect(() => {
         let active = true;
@@ -110,7 +121,10 @@ const PortfolioComponent = ({ openProject }: Props) => {
                 setTotalPages(Math.ceil(dataProjects.total / dataProjects.perPage));
                 setCategories(dataCategories.data);
             } finally {
-                if (active) setLoading(false);
+                if (active) {
+                    setLoading(false);
+                    requestAnimationFrame(() => scrollToFirst());
+                }
             }
         }
         load();
@@ -151,11 +165,12 @@ const PortfolioComponent = ({ openProject }: Props) => {
                     ? <Typography>carregando...</Typography>
                     : projects.length < 1
                         ? <Typography width="80%" align="center" p={theme.spacing(3)} bgcolor={theme.palette.background.paper}>
-                            Projetos incríveis estão sendo desenvolvidos! Dê uma passada aqui mais tarde ou entre em contato para saber mais.
+                            Projetos em desenvolvimento. Dê uma passada aqui mais tarde ou entre em contato para saber mais.
                         </Typography>
                         : projects.map((project, index) => (
                             <ProjectCard
                                 key={project.id}
+                                ref={index === 0 ? firstProjectRef : null}
                                 project={project}
                                 index={index}
                                 openProject={openProject}
@@ -164,7 +179,13 @@ const PortfolioComponent = ({ openProject }: Props) => {
                         ))
                 }
 
-                <PaginationComponent totalPages={totalPages} currentPage={page} onPageChange={setPage} />
+                {projects.length > 0 &&
+                    <PaginationComponent
+                        totalPages={totalPages}
+                        currentPage={page}
+                        onPageChange={(p) => setPage(p)}
+                    />
+                }
             </Box>
         </Box>
     );

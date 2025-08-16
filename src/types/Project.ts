@@ -9,6 +9,7 @@ export interface Project {
   imageUrl?: string
   repositoryLink?: string
   demoLink?: string
+  videoLink?: string
   orderNumber?: number
   categories: Category[]
   techs: Tech[]
