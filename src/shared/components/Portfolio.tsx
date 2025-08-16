@@ -9,6 +9,7 @@ import { PaginationComponent } from './PaginationComponent';
 import { Icon } from "@iconify/react";
 import ImageWithSkeleton from "./Skeleton/ImageWithSkeleton";
 import React from "react";
+import { set } from "zod";
 
 type Props = {
     openProject: (name: string) => void;
@@ -98,11 +99,12 @@ const PortfolioComponent = ({ openProject }: Props) => {
     const [loading, setLoading] = useState(true)
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
-    const firstProjectRef = useRef<HTMLDivElement | null>(null);
+    const [pageChanged, setpageChanged] = useState(false)
+    const scrollUp = useRef<HTMLDivElement | null>(null);
 
     const scrollToFirst = () => {
-        if (!firstProjectRef.current) return;
-        const top = firstProjectRef.current.getBoundingClientRect().top + window.scrollY;
+        if (!scrollUp.current) return;
+        const top = scrollUp.current.getBoundingClientRect().top + window.scrollY;
         window.scrollTo({
             top: top - (mediumScreen ? 40 : 120),
             behavior: "smooth"
@@ -123,7 +125,11 @@ const PortfolioComponent = ({ openProject }: Props) => {
             } finally {
                 if (active) {
                     setLoading(false);
-                    requestAnimationFrame(() => scrollToFirst());
+
+                    if (pageChanged) {
+                        requestAnimationFrame(() => scrollToFirst());
+                        setpageChanged(false);
+                    }
                 }
             }
         }
@@ -170,7 +176,7 @@ const PortfolioComponent = ({ openProject }: Props) => {
                         : projects.map((project, index) => (
                             <ProjectCard
                                 key={project.id}
-                                ref={index === 0 ? firstProjectRef : null}
+                                ref={index === 0 ? scrollUp : null}
                                 project={project}
                                 index={index}
                                 openProject={openProject}
@@ -183,7 +189,7 @@ const PortfolioComponent = ({ openProject }: Props) => {
                     <PaginationComponent
                         totalPages={totalPages}
                         currentPage={page}
-                        onPageChange={(p) => setPage(p)}
+                        onPageChange={(p) => {setPage(p); setpageChanged(true);}}
                     />
                 }
             </Box>
