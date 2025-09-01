@@ -71,9 +71,9 @@ const ContactComponent = () => {
     const InfoData: CardItem[] = [
         {
             id: 1,
-            text: '+55 81 994566887',
+            text: '+55 81 991080086',
             icon: 'ic:baseline-whatsapp',
-            link: 'https://wa.me/5581994566887'
+            link: 'https://wa.me/5581991080086'
         },
         {
             id: 2,
