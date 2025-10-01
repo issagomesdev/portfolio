@@ -30,7 +30,7 @@ const AboutMeComponent = () => {
                         <ImageWithSkeleton
                             src={`/images/profilePhoto.png`}
                             alt="perfil photo"
-                            ratio={'8/11'}
+                            ratio={'9/11'}
                             rounded={false}
                             style={{ width: '100%', height: 'auto' }}
                         />
