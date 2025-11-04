@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CustomTextarea } from "./ui/styles/CustomTextarea";
 import { useForm } from "react-hook-form";
 import { showToast } from "../utils/Toast";
+import { receiveData } from "../../controllers/contact.controller";
 
 const ContactComponent = () => {
     const theme = useTheme();
@@ -66,7 +67,7 @@ const ContactComponent = () => {
                 </Box>
             </a>
         );
-    };   
+    };
 
     const InfoData: CardItem[] = [
         {
@@ -77,9 +78,9 @@ const ContactComponent = () => {
         },
         {
             id: 2,
-            text: 'byissag@gmail.com',
+            text: 'issagomesdev@gmail.com',
             icon: 'ic:twotone-email',
-            link: 'mailto:byissag@gmail.com'
+            link: 'mailto:issagomesdev@gmail.com'
         },
         {
             id: 3,
@@ -90,13 +91,13 @@ const ContactComponent = () => {
 
     const InfoComponent = ({ text, icon, link }: CardItem) => {
         return (
-            <a href={link} target="_blank" style={{ color: 'white'}} rel="noopener noreferrer">
-            <Box display={'flex'} gap={theme.spacing(2)} color={'white'} alignItems={'center'}>
-                <Box sx={{ background: `linear-gradient(to bottom, #9b9d8745 0%, #777865 75%, #7E7F6C 100%)` }} boxShadow={'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'} display={'flex'} alignItems={'center'} borderRadius={'4px'} width={theme.spacing(7)} height={theme.spacing(7)} justifyContent={'center'}>
-                    <Icon icon={icon} width={theme.spacing(5)} color={'white'} />
+            <a href={link} target="_blank" style={{ color: 'white', width: "fit-content" }} rel="noopener noreferrer">
+                <Box display={'flex'} gap={theme.spacing(2)} color={'white'} alignItems={'center'}>
+                    <Box sx={{ background: `linear-gradient(to bottom, #9b9d8745 0%, #777865 75%, #7E7F6C 100%)` }} boxShadow={'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px'} display={'flex'} alignItems={'center'} borderRadius={'4px'} width={theme.spacing(7)} height={theme.spacing(7)} justifyContent={'center'}>
+                        <Icon icon={icon} width={theme.spacing(5)} color={'white'} />
+                    </Box>
+                    <Typography fontFamily={'"Akatab", sans-serif'}>{text}</Typography>
                 </Box>
-                <Typography fontFamily={'"Akatab", sans-serif'}>{text}</Typography>
-            </Box>
             </a>
         )
     }
@@ -113,19 +114,23 @@ const ContactComponent = () => {
         resolver: zodResolver(createContactSchema)
     });
 
-    async function handleSubmitContact(data: CreateContactSchema) {
-        console.log(data);
-        const promise = new Promise<string>((resolver) => setTimeout(() => resolver("Dados carregados"), 2000));
+    async function handleSubmitContact(data: any) {
+        const promise = (async () => {
+            await receiveData(data);
+            return "Dados enviados";
+        })();
 
         await showToast.promise(promise, {
             loading: "Enviando...",
             success: {
-                message: "Formulario enviado com sucesso!",
-                description: "Agora basta guardar que em breve retornarei o contato. Caso prefira, pode me avisar pelo WhatsApp sobre o envio do e-mail para agilizar o atendimento ou tirar dúvidas. Estou à disposição!"
+                message: "Formulário enviado com sucesso!",
+                description:
+                    "Em breve retornarei o contato. Caso prefira, me avise pelo WhatsApp para agilizar o atendimento.",
             },
             error: {
                 message: "Erro ao enviar o formulário",
-                description: "Houve um problema ao tentar enviar o formulário. Tente novamente ou se preferir, entre em contato comigo pelo WhatsApp."
+                description:
+                    "Tente novamente ou entre em contato comigo pelo WhatsApp.",
             },
         });
 
@@ -135,10 +140,10 @@ const ContactComponent = () => {
     }
 
     return (
-        <Box bgcolor={theme.palette.secondary.main} width={'100%'} borderRadius={smallScreen? '60px 60px 0px 0px' : '100px 100px 0px 0px'} display={'flex'} justifyContent={'center'} alignItems={'center'} paddingTop={theme.spacing(3)}>
-            <Box width={smallScreen? '90%': '95%'} height={'100%'} display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(5)}>
+        <Box bgcolor={theme.palette.secondary.main} width={'100%'} borderRadius={smallScreen ? '60px 60px 0px 0px' : '100px 100px 0px 0px'} display={'flex'} justifyContent={'center'} alignItems={'center'} paddingTop={theme.spacing(3)}>
+            <Box width={smallScreen ? '90%' : '95%'} height={'100%'} display={'flex'} flexDirection={'column'} alignItems={'center'} gap={theme.spacing(5)}>
                 <Typography variant="sectionTitle" color={'white'}> Contato </Typography>
-                <Box display={'flex'} width={mediumScreen2? '95%' : '100%'} {...(mediumScreen || mediumScreen2 ? { flexWrap: 'wrap', gap: theme.spacing(4) } : null)}>
+                <Box display={'flex'} width={mediumScreen2 ? '95%' : '100%'} {...(mediumScreen || mediumScreen2 ? { flexWrap: 'wrap', gap: theme.spacing(4) } : null)}>
                     <Box display={'flex'} flexDirection={'column'} gap={theme.spacing(4)}>
                         <Box>
                             <Typography color={'white'} fontFamily={'"Akatab", sans-serif'} fontSize={mediumScreen ? theme.spacing(3) : theme.spacing(4)} fontWeight={'500'}>Me envie uma mensagem</Typography>

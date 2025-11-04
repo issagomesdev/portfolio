@@ -1,10 +1,20 @@
 import { getProjects, getProject } from '../services/project.service'
 
 export const allProjects = async (filters = {}) => {
-  return await getProjects(filters)
+  try {
+    const response = await getProjects(filters)
+    return response;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export const projectByName = async (name: string) => {
-  return await getProject(name)
+  try {
+    const response = await getProject(name)
+    return response;
+  } catch (error) {
+    throw error;
+  }
 }
 
