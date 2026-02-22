@@ -5,6 +5,7 @@ import { SectionController } from "../../controllers/section.controller";
 interface ISectionContextData {
     sections: Section[];
     section?: Section;
+    sectionsLoaded: boolean;
     toggleSection: (section: Section) => void;
 }
 
@@ -19,6 +20,7 @@ export const SectionProvider: React.FC<ISectionProviderProps> = ({ children }) =
 
     const [sections, setSections] = useState<Section[]>([]);
     const [section, setSection] = useState<Section>();
+    const [sectionsLoaded, setSectionsLoaded] = useState<boolean>(false);
     const [scrollControl, setScrollControl] = useState<boolean>(true);
     const sectionElementsRef = useRef<Record<string, HTMLElement>>({});
 
@@ -32,10 +34,14 @@ export const SectionProvider: React.FC<ISectionProviderProps> = ({ children }) =
 
     useEffect(() => {
         const fetchSections = async () => {
-            const data = await SectionController.getSections();
-            setSections(data);
-            if (data.length > 0) {
-                setSection(data[0]);
+            try {
+                const data = await SectionController.getSections();
+                setSections(data);
+                if (data.length > 0) {
+                    setSection(data[0]);
+                }
+            } finally {
+                setSectionsLoaded(true);
             }
         };
         fetchSections();
@@ -76,8 +82,9 @@ export const SectionProvider: React.FC<ISectionProviderProps> = ({ children }) =
     const value = useMemo(() => ({
         sections,
         section,
+        sectionsLoaded,
         toggleSection,
-    }), [sections, section, toggleSection]);
+    }), [sections, section, sectionsLoaded, toggleSection]);
 
     return (
         <SectionContext.Provider value={value}>

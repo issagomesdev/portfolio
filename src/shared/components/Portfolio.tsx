@@ -9,6 +9,7 @@ import { PaginationComponent } from './PaginationComponent';
 import { Icon } from "@iconify/react";
 import ImageWithSkeleton from "./Skeleton/ImageWithSkeleton";
 import React from "react";
+import { motion } from "framer-motion";
 
 type Props = {
     openProject: (name: string) => void;
@@ -24,90 +25,101 @@ const ProjectCard = forwardRef<HTMLDivElement, {
     const mediumScreen = useMediaQuery(theme.breakpoints.down('md'));
     const mediumScreen2 = useMediaQuery(theme.breakpoints.between('md', 'lg'));
 
+    // On mobile use y-slide to avoid horizontal overflow; desktop uses alternating x-slide
+    const xOffset = mediumScreen ? 0 : (project.id % 2 === 0 ? 70 : -70);
+    const yOffset = mediumScreen ? 32 : 0;
+
     return (
-        <Box
-            ref={ref}
-            display="flex"
-            width={mediumScreen ? '80%' : '60%'}
-            gap={(mediumScreen || mediumScreen2) ? theme.spacing(7) : theme.spacing(8)}
-            {...(mediumScreen || mediumScreen2
-                ? { flexDirection: 'column-reverse', alignItems: project.id % 2 === 0 ? 'flex-end' : 'flex-start' }
-                : { flexDirection: project.id % 2 === 0 ? 'row' : 'row-reverse', alignItems: 'flex-start' })}
-            {...(mediumScreen ? { right: '5%' } : {})}
+        <motion.div
+            initial={{ opacity: 0, x: xOffset, y: yOffset }}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.75, ease: [0.25, 0.46, 0.45, 0.94] }}
+            style={{ width: mediumScreen ? '80%' : '60%' }}
         >
-            <Box width={mediumScreen ? '100%' : '80%'} display="flex" flexDirection="column" gap={theme.spacing(1)}>
-                <Box display="flex" flexDirection="column" alignItems={(mediumScreen || mediumScreen2) && project.id % 2 === 0 ? 'flex-end' : 'flex-start'}>
-                    <Typography variant="projectNumber" color={theme.palette.primary.main} {...(mediumScreen ? { fontSize: theme.spacing(4.5), lineHeight: theme.spacing(4.5) } : {})}>
-                        Projeto {project.id}
-                    </Typography>
-                    <Typography variant="projectName" textAlign={(mediumScreen || mediumScreen2) && project.id % 2 === 0 ? 'end' : 'start'} {...(mediumScreen ? { fontSize: theme.spacing(3.5), lineHeight: theme.spacing(3.5) } : {})}>
-                        {project.name}
-                    </Typography>
+            <Box
+                ref={ref}
+                display="flex"
+                width={'100%'}
+                gap={(mediumScreen || mediumScreen2) ? theme.spacing(7) : theme.spacing(8)}
+                {...(mediumScreen || mediumScreen2
+                    ? { flexDirection: 'column-reverse', alignItems: project.id % 2 === 0 ? 'flex-end' : 'flex-start' }
+                    : { flexDirection: project.id % 2 === 0 ? 'row' : 'row-reverse', alignItems: 'flex-start' })}
+                {...(mediumScreen ? { right: '5%' } : {})}
+            >
+                <Box width={mediumScreen ? '100%' : '80%'} display="flex" flexDirection="column" gap={theme.spacing(1)}>
+                    <Box display="flex" flexDirection="column" alignItems={(mediumScreen || mediumScreen2) && project.id % 2 === 0 ? 'flex-end' : 'flex-start'}>
+                        <Typography variant="projectNumber" color={theme.palette.primary.main} {...(mediumScreen ? { fontSize: theme.spacing(4.5), lineHeight: theme.spacing(4.5) } : {})}>
+                            Projeto {project.id}
+                        </Typography>
+                        <Typography variant="projectName" textAlign={(mediumScreen || mediumScreen2) && project.id % 2 === 0 ? 'end' : 'start'} {...(mediumScreen ? { fontSize: theme.spacing(3.5), lineHeight: theme.spacing(3.5) } : {})}>
+                            {project.name}
+                        </Typography>
+                    </Box>
+
+                    <Typography textAlign="justify">{project.description}</Typography>
+
+                    <Box sx={{ display: 'flex', gap: .8, alignItems: 'center' }}>
+                        {project.repositoryLink && (
+                            <a href={project.repositoryLink} style={{ color: theme.palette.primary.contrastText, display: 'flex', WebkitTapHighlightColor: 'transparent' }}>
+                                <Icon icon="mdi:github" width={theme.spacing(4)} />
+                            </a>
+                        )}
+                        {project.demoLink && (
+                            <a href={`https://${project.demoLink}`} style={{ color: theme.palette.primary.contrastText, display: 'flex', WebkitTapHighlightColor: 'transparent' }}>
+                                <Icon icon="line-md:link" width={theme.spacing(3.5)} />
+                            </a>
+                        )}
+                    </Box>
+
+                    {/* "ler mais" desliza ao hover */}
+                    <motion.div whileHover={{ x: 8 }} transition={{ duration: 0.2 }} style={{ display: 'inline-block' }}>
+                        <Typography
+                            fontFamily="Staatliches"
+                            color={theme.palette.primary.main}
+                            sx={{ cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}
+                            onClick={() => {
+                                openProject(project.name);
+                                window.history.replaceState(null, '', '' + `/project/${encodeURIComponent(project.name)}`);
+                            }}
+                        >
+                            ➞ ler mais
+                        </Typography>
+                    </motion.div>
                 </Box>
 
-                <Typography textAlign="justify">{project.description}</Typography>
-
-                <Box sx={{ display: 'flex', gap: .8, alignItems: 'center' }}>
-                    {project.repositoryLink && (
-                        <a href={project.repositoryLink} style={{ color: theme.palette.primary.contrastText, display: 'flex', WebkitTapHighlightColor: 'transparent' }}>
-                            <Icon icon="mdi:github" width={theme.spacing(4)} />
-                        </a>
-                    )}
-                    {project.demoLink && (
-                        <a href={`https://${project.demoLink}`} style={{ color: theme.palette.primary.contrastText, display: 'flex', WebkitTapHighlightColor: 'transparent' }}>
-                            <Icon icon="line-md:link" width={theme.spacing(3.5)} />
-                        </a>
-                    )}
+                <Box sx={(t) => ProjectItem(t, mediumScreen ? '0%' : mediumScreen2 ? '-4%' : '30px')} {...(mediumScreen || mediumScreen2 ? { width: mediumScreen ? '80%' : '70%' } : { width: theme.spacing(120) })}>
+                    <ImageWithSkeleton
+                        src={project.imageUrl}
+                        alt={project.name}
+                        ratio="4/3"
+                        rounded={false}
+                        style={{ width: '100%', height: 'auto' }}
+                    />
                 </Box>
-
-                <Typography
-                    fontFamily="Staatliches"
-                    color={theme.palette.primary.main}
-                    sx={{ cursor: 'pointer', WebkitTapHighlightColor: 'transparent' }}
-                    onClick={() => {
-                        openProject(project.name)
-                        window.history.replaceState(null, '', '' + `/project/${encodeURIComponent(project.name)}`);
-                    }}
-                >
-                    ➞ ler mais
-                </Typography>
             </Box>
-
-            <Box sx={(t) => ProjectItem(t, (mediumScreen || mediumScreen2) ? '-8%' : '30px')} {...(mediumScreen || mediumScreen2 ? { width: mediumScreen ? '80%' : '70%' } : { width: theme.spacing(120) })}>
-                <ImageWithSkeleton
-                    src={project.imageUrl}
-                    alt={project.name}
-                    ratio="4/3"
-                    rounded={false}
-                    style={{ width: '100%', height: 'auto' }}
-                />
-            </Box>
-        </Box>
+        </motion.div>
     );
 });
 
 const PortfolioComponent = ({ openProject }: Props) => {
-
     const theme = useTheme();
     const mediumScreen = useMediaQuery(theme.breakpoints.down("md"));
     const mediumScreen2 = useMediaQuery(theme.breakpoints.between("md", "lg"));
 
-    const [projects, setProjects] = useState<Project[]>([])
-    const [categories, setCategories] = useState<Category[]>([])
-    const [categorySelected, setCategorySelected] = useState<number | null>(null)
-    const [loading, setLoading] = useState(true)
-    const [page, setPage] = useState(1)
-    const [totalPages, setTotalPages] = useState(1)
-    const [pageChanged, setpageChanged] = useState(false)
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [categorySelected, setCategorySelected] = useState<number | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [pageChanged, setpageChanged] = useState(false);
     const scrollUp = useRef<HTMLDivElement | null>(null);
 
     const scrollToFirst = () => {
         if (!scrollUp.current) return;
         const top = scrollUp.current.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({
-            top: top - (mediumScreen ? 40 : 120),
-            behavior: "smooth"
-        });
+        window.scrollTo({ top: top - (mediumScreen ? 40 : 120), behavior: "smooth" });
     };
 
     React.useEffect(() => {
@@ -124,7 +136,6 @@ const PortfolioComponent = ({ openProject }: Props) => {
             } finally {
                 if (active) {
                     setLoading(false);
-
                     if (pageChanged) {
                         requestAnimationFrame(() => scrollToFirst());
                         setpageChanged(false);
@@ -138,32 +149,39 @@ const PortfolioComponent = ({ openProject }: Props) => {
 
     return (
         <Box display="flex" flexDirection="column" justifyContent="center" gap={theme.spacing(mediumScreen ? 8 : mediumScreen2 ? 10 : 15)} width="100%">
-            <Box display="flex" flexDirection="column" alignItems="center" gap={theme.spacing(2)}>
-                <Typography variant="sectionTitle">Portfolio</Typography>
 
-                <Box display="flex" width="fit-content" mx={theme.spacing(1.5)} {...(mediumScreen ? { justifyContent: 'center', flexWrap: 'wrap' } : { justifyContent: 'space-between' })} columnGap={theme.spacing(4)}>
-                    <Typography
-                        sx={{ cursor: 'pointer' }}
-                        variant="projectType"
-                        {...(categorySelected === null ? { color: theme.palette.primary.main } : null)}
-                        onClick={() => { setPage(1); setCategorySelected(null); }}
-                    >
-                        Todos
-                    </Typography>
-
-                    {categories.map((category) => (
+            {/* Título + filtros — desce do topo */}
+            <motion.div
+                initial={{ opacity: 0, y: -28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.5 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+                <Box display="flex" flexDirection="column" alignItems="center" gap={theme.spacing(2)}>
+                    <Typography variant="sectionTitle">Portfolio</Typography>
+                    <Box display="flex" width="fit-content" mx={theme.spacing(1.5)} {...(mediumScreen ? { justifyContent: 'center', flexWrap: 'wrap' } : { justifyContent: 'space-between' })} columnGap={theme.spacing(4)}>
                         <Typography
-                            key={category.id}
                             sx={{ cursor: 'pointer' }}
                             variant="projectType"
-                            {...(category.id === categorySelected ? { color: theme.palette.primary.main } : null)}
-                            onClick={() => { setPage(1); setCategorySelected(category.id); }}
+                            {...(categorySelected === null ? { color: theme.palette.primary.main } : null)}
+                            onClick={() => { setPage(1); setCategorySelected(null); }}
                         >
-                            {category.name}
+                            Todos
                         </Typography>
-                    ))}
+                        {categories.map((category) => (
+                            <Typography
+                                key={category.id}
+                                sx={{ cursor: 'pointer' }}
+                                variant="projectType"
+                                {...(category.id === categorySelected ? { color: theme.palette.primary.main } : null)}
+                                onClick={() => { setPage(1); setCategorySelected(category.id); }}
+                            >
+                                {category.name}
+                            </Typography>
+                        ))}
+                    </Box>
                 </Box>
-            </Box>
+            </motion.div>
 
             <Box display="flex" gap={(mediumScreen || mediumScreen2) ? theme.spacing(9) : theme.spacing(15)} flexDirection="column" alignItems="center">
                 {loading
@@ -183,17 +201,16 @@ const PortfolioComponent = ({ openProject }: Props) => {
                             />
                         ))
                 }
-
                 {projects.length > 0 &&
                     <PaginationComponent
                         totalPages={totalPages}
                         currentPage={page}
-                        onPageChange={(p) => {setPage(p); setpageChanged(true);}}
+                        onPageChange={(p) => { setPage(p); setpageChanged(true); }}
                     />
                 }
             </Box>
         </Box>
     );
-}
+};
 
 export default PortfolioComponent;
