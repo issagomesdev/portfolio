@@ -25,7 +25,7 @@ const ProjectComponent = ({ project, closeProject }: Props) => {
       setLoading(true)
       if (project?.content_file) {
         try {
-          const res = await files.get(`/files/${project.content_file}`);
+          const res = await files.get(`/files/ReadMore/${project.content_file}`);
           setContent(res.data);
           setLoading(false)
         } catch (error) {

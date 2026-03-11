@@ -3,4 +3,5 @@ export interface Tech {
   name: string
   icon: string
   description?: string
+  color?: string
 }

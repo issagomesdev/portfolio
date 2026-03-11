@@ -1,5 +1,4 @@
 import { Category } from './Category'
-import { Tech } from './Tech'
 
 export interface Project {
   id: number
@@ -12,5 +11,5 @@ export interface Project {
   videoLink?: string
   orderNumber?: number
   categories: Category[]
-  techs: Tech[]
+  techs: number[]
 }
