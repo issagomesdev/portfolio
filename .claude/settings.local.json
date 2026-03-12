@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(mkdir -p c:/dev/portfolio/public/fonts)",
-      "Bash(cp \"c:/dev/portfolio/node_modules/@fontsource/staatliches/files/staatliches-latin-400-normal.woff2\" \"c:/dev/portfolio/public/fonts/\")",
-      "Bash(cp \"c:/dev/portfolio/node_modules/@fontsource/caveat/files/caveat-latin-400-normal.woff2\" \"c:/dev/portfolio/public/fonts/\")"
-    ]
-  }
-}
