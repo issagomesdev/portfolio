@@ -144,6 +144,7 @@ const PortfolioComponent = ({ openProject }: Props) => {
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [totalProjects, setTotalProjects] = useState(0);
     const [pageChanged, setpageChanged] = useState(false);
     const scrollUp = useRef<HTMLDivElement | null>(null);
 
@@ -193,6 +194,7 @@ const PortfolioComponent = ({ openProject }: Props) => {
                 if (!active) return;
                 setProjects(dataProjects.data);
                 setTotalPages(Math.ceil(dataProjects.total / dataProjects.perPage));
+                setTotalProjects(dataProjects.total);
             } finally {
                 if (active) {
                     setLoading(false);
@@ -217,7 +219,7 @@ const PortfolioComponent = ({ openProject }: Props) => {
                 viewport={{ once: false, amount: 0.5 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
             >
-                <Box display="flex" flexDirection="column" alignItems="center" gap={theme.spacing(2)}>
+                <Box display="flex" flexDirection="column" alignItems="center" gap={theme.spacing(5)}>
                     <Typography variant="sectionTitle">Portfolio</Typography>
 
                     {/* Filtro de categorias */}
@@ -251,7 +253,7 @@ const PortfolioComponent = ({ openProject }: Props) => {
                             sx={{
                                 display: 'flex', alignItems: 'center',
                                 px: 2.5, py: 1.2, cursor: 'pointer',
-                               boxShadow: theme.palette.mode === 'dark' ? 'none' : 'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;',
+                                boxShadow: theme.palette.mode === 'dark' ? 'none' : 'rgba(0, 0, 0, 0) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;',
                                 borderRadius: '8px',
                                 width: '100%',
                                 justifyContent: 'space-between',
@@ -274,7 +276,7 @@ const PortfolioComponent = ({ openProject }: Props) => {
                                 transform: 'translateX(-50%)',
                                 zIndex: 10,
                                 bgcolor: theme.palette.background.paper,
-                                
+
                                 borderRadius: '8px',
                                 p: 1.5,
                                 width: '100%',
@@ -331,10 +333,16 @@ const PortfolioComponent = ({ openProject }: Props) => {
                             </Box>
                         )}
                     </Box>
+                    {!loading && totalProjects > 0 && (
+                        <Typography variant="body2" align="center" sx={{ mt: -2, color: theme.palette.text.secondary, fontSize: '1.1rem' }}>
+                            {totalProjects} resultado{totalProjects > 1 ? 's' : ''} encontrado{totalProjects > 1 ? 's' : ''}
+                        </Typography>
+                    )}
                 </Box>
             </motion.div>
 
             <Box display="flex" gap={(mediumScreen || mediumScreen2) ? theme.spacing(9) : theme.spacing(15)} flexDirection="column" alignItems="center">
+
                 {loading
                     ? <Typography>carregando...</Typography>
                     : projects.length < 1
