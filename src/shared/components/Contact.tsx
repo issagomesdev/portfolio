@@ -67,9 +67,9 @@ const ContactComponent = () => {
 
     const SMData: CardItem[] = [
         { id: 1, text: 'Youtube', icon: 'line-md:youtube-twotone', link: 'https://www.youtube.com/@issagomesdev' },
-        { id: 2, text: 'Instagram', icon: 'icon-park-twotone:instagram', link: 'https://www.instagram.com/issag.dev/' },
-        { id: 3, text: 'GitHub', icon: 'uim:github', link: 'https://github.com/issagomesdev' },
-        { id: 3, text: 'LinkedIn', icon: 'uim:linkedin', link: 'https://www.linkedin.com/in/issagomesdev/' },
+        { id: 2, text: 'Instagram', icon: 'line-md:instagram', link: 'https://www.instagram.com/issagomesdev/' },
+        { id: 3, text: 'GitHub', icon: 'line-md:github-twotone', link: 'https://github.com/issagomesdev' },
+        { id: 3, text: 'LinkedIn', icon: 'line-md:linkedin', link: 'https://www.linkedin.com/in/issagomesdev/' },
     ];
 
     const SMComponent = ({ icon, link }: CardItem) => (
